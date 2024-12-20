@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="referrer" content="no-referrer" />
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"patr1ck-s.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="dump运行程序 输入几个字符 观察回显随后看了一下flag头的映射">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2024 ciscn&amp;ccb Re wp">
+<meta property="og:url" content="http://patr1ck-s.github.io/2024/12/20/2024-ciscn-ccb-Re-wp/index.html">
+<meta property="og:site_name" content="Part1ck&#39;s blog">
+<meta property="og:description" content="dump运行程序 输入几个字符 观察回显随后看了一下flag头的映射">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage4.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage5.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage6.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage7.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage8.png">
+<meta property="article:published_time" content="2024-12-20T06:21:15.000Z">
+<meta property="article:modified_time" content="2024-12-20T07:27:54.663Z">
+<meta property="article:author" content="Patr1ck">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://patr1ck-s.github.io/%5Cimages%5Cimage1.png">
+
+
+<link rel="canonical" href="http://patr1ck-s.github.io/2024/12/20/2024-ciscn-ccb-Re-wp/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://patr1ck-s.github.io/2024/12/20/2024-ciscn-ccb-Re-wp/","path":"2024/12/20/2024-ciscn-ccb-Re-wp/","title":"2024 ciscn&ccb Re wp"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2024 ciscn&ccb Re wp | Part1ck's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Part1ck's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dump"><span class="nav-number">1.</span> <span class="nav-text">dump</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ezCsky"><span class="nav-number">2.</span> <span class="nav-text">ezCsky</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patr1ck"
+      src="/images/yzbpdx.png">
+  <p class="site-author-name" itemprop="name">Patr1ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://patr1ck-s.github.io/2024/12/20/2024-ciscn-ccb-Re-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yzbpdx.png">
+      <meta itemprop="name" content="Patr1ck">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Part1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2024 ciscn&ccb Re wp | Part1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2024 ciscn&ccb Re wp
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-12-20 14:21:15 / 修改时间：15:27:54" itemprop="dateCreated datePublished" datetime="2024-12-20T14:21:15+08:00">2024-12-20</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="dump"><a href="#dump" class="headerlink" title="dump"></a>dump</h1><p>运行程序 输入几个字符 观察回显<br><img src="/%5Cimages%5Cimage1.png"><br>随后看了一下flag头的映射</p>
+<span id="more"></span>
+
+<p><img src="/%5Cimages%5Cimage2.png"></p>
+<p>跟flag的前几位一样</p>
+<p><img src="/%5Cimages%5Cimage3.png"></p>
+<p>发现是单字节加密 所以将所有的可打印字符输入进去dump一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import string  </span><br><span class="line">all_char = string.printable  </span><br><span class="line">print(all_char)</span><br><span class="line">#0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!&quot;#$%&amp;&#x27;()*+,-./:;&lt;=&gt;?@[\]^_`&#123;|&#125;~ 	</span><br></pre></td></tr></table></figure>
+<p>得到映射表<br><img src="/%5Cimages%5Cimage4.png"></p>
+<p>001c1d000000000000001e1f202122232425262728292a2b2c2d2e2f303132333435363702030405060708090a0b0c0d0e0f101112131415161718191a1b00000000000000000000000000000000000100000000000000000038003900</p>
+<p>随后将flag一一映射过去即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import string  </span><br><span class="line">all_char = string.printable  </span><br><span class="line">#print(all_char)  </span><br><span class="line">table = list(bytes.fromhex(&quot;001c1d000000000000001e1f202122232425262728292a2b2c2d2e2f303132333435363702030405060708090a0b0c0d0e0f101112131415161718191a1b000000000000000000000000000000000100000000000000000038003900&quot;))  </span><br><span class="line">flag = list(bytes.fromhex(&quot;23 29 1E 24 38 0E 15 20 37 0E 05 20 00 0E 37 12 1D 0F 24 01 01 39&quot;))  </span><br><span class="line">for x in flag:  </span><br><span class="line">    if x in table:  </span><br><span class="line">        print(all_char[table.index(x)], end=&quot;&quot;)</span><br><span class="line">#flag_MTczMDc0MzQ2Ng;;&#123;</span><br></pre></td></tr></table></figure>
+<p>手动修改一下flag 结合提示第十四位是4 直接改一下即可<br> flag{MTczMDc4MzQ2Ng=&#x3D;}</p>
+<h1 id="ezCsky"><a href="#ezCsky" class="headerlink" title="ezCsky"></a>ezCsky</h1><p>ida打开附件 得选择arm去分析 这里走了好多弯 </p>
+<p>发现有RC4 猜测rc4加密 找key和密文</p>
+<p><img src="/%5Cimages%5Cimage5.png"></p>
+<p>找到key 跟进unk_8AA0</p>
+<p><img src="/%5Cimages%5Cimage6.png"></p>
+<p>找到密文</p>
+<p><img src="/%5Cimages%5Cimage7.png"></p>
+<p>直接解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Cipher import ARC4  </span><br><span class="line">encrypt_data= [0x96, 0x8F, 0xB8, 0x08, 0x5D, 0xA7, 0x68, 0x44, 0xF2, 0x64,  </span><br><span class="line">  0x92, 0x64, 0x42, 0x7A, 0x78, 0xE6, 0xEA, 0xC2, 0x78, 0xB8,  </span><br><span class="line">  0x63, 0x9E, 0x5B, 0x3D, 0xD9, 0x28, 0x3F, 0xC8, 0x73, 0x06,  </span><br><span class="line">  0xEE, 0x6B, 0x8D, 0x0C, 0x4B, 0xA3, 0x23, 0xAE, 0xCA, 0x40,  </span><br><span class="line">  0xED, 0xD1] # 加密key  </span><br><span class="line">key = b&#x27;testkey&#x27;     # 加密方法  </span><br><span class="line">key1=ARC4.new(key)  </span><br><span class="line">print(key1.encrypt(bytes(encrypt_data)))         # 解密方法</span><br><span class="line">#b&#x27;\n\r\x06\x1c\x1fTVSWQ\x00\x03\x1d\x14XV\x03\x19\x1c\x00T\x03K\x14X\x07\x02IL\x02\x07\x01Q\x0c\x08\x00\x01\x00\x03\x00O&#125;&#x27;</span><br></pre></td></tr></table></figure>
+<p>最后一位是} 前面的都不对 结合左边的符号表有xor函数</p>
+<p><img src="/%5Cimages%5Cimage8.png"></p>
+<p>猜测进行了异或 但是最后一位没有异或 所以猜测加密的异或可能是<br>flag[i]^&#x3D;flag[i+1]<br>直接写逆向脚本即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Cipher import ARC4  </span><br><span class="line">encrypt_data= [0x96, 0x8F, 0xB8, 0x08, 0x5D, 0xA7, 0x68, 0x44, 0xF2, 0x64,  </span><br><span class="line">  0x92, 0x64, 0x42, 0x7A, 0x78, 0xE6, 0xEA, 0xC2, 0x78, 0xB8,  </span><br><span class="line">  0x63, 0x9E, 0x5B, 0x3D, 0xD9, 0x28, 0x3F, 0xC8, 0x73, 0x06,  </span><br><span class="line">  0xEE, 0x6B, 0x8D, 0x0C, 0x4B, 0xA3, 0x23, 0xAE, 0xCA, 0x40,  </span><br><span class="line">  0xED, 0xD1] # 加密key  </span><br><span class="line">key = b&#x27;testkey&#x27;     # 加密方法  </span><br><span class="line">key1=ARC4.new(key)  </span><br><span class="line">print(key1.encrypt(bytes(encrypt_data)))         # 解密方法  </span><br><span class="line">flag = b&#x27;\n\r\x06\x1c\x1fTVSWQ\x00\x03\x1d\x14XV\x03\x19\x1c\x00T\x03K\x14X\x07\x02IL\x02\x07\x01Q\x0c\x08\x00\x01\x00\x03\x00O&#125;&#x27;  </span><br><span class="line"># 将 flag 转换为 list，便于修改  </span><br><span class="line">flag = list(flag)  </span><br><span class="line">for i in range(len(flag)-1,0,-1):  </span><br><span class="line">    flag[i-1] ^= flag[i]  </span><br><span class="line">    print(chr(flag[i]),end=&#x27;&#x27;)  </span><br><span class="line">chr_flag=&#x27;&#125;22110084edca-dfa9-fe11-47a9-033b5f0d&#123;gal&#x27;  </span><br><span class="line">print(chr_flag[::-1])</span><br><span class="line">#lag&#123;d0f5b330-9a74-11ef-9afd-acde48001122&#125;</span><br></pre></td></tr></table></figure>
+<p>少了个f 在前面加上就是正确的flag</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/20/Preface/" rel="prev" title="Preface">
+                  <i class="fa fa-angle-left"></i> Preface
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Patr1ck</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">3k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
