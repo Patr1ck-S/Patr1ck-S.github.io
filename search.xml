@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2024 ciscn&amp;ccb Re wp</title>
+    <title>2024 ciscn&amp;ccb RE wp</title>
     <url>/2024/12/20/2024-ciscn-ccb-Re-wp/</url>
     <content><![CDATA[<h1 id="dump"><a href="#dump" class="headerlink" title="dump"></a>dump</h1><p>运行程序 输入几个字符 观察回显</p>
 <p><img src="/../images/image1-1734689935552-1.png" alt="image1"></p>
@@ -32,6 +32,32 @@
 <p>猜测进行了异或 但是最后一位没有异或 所以猜测加密的异或可能是<br>flag[i]^&#x3D;flag[i+1]<br>直接写逆向脚本即可</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">from Crypto.Cipher import ARC4  </span><br><span class="line">encrypt_data= [0x96, 0x8F, 0xB8, 0x08, 0x5D, 0xA7, 0x68, 0x44, 0xF2, 0x64,  </span><br><span class="line">  0x92, 0x64, 0x42, 0x7A, 0x78, 0xE6, 0xEA, 0xC2, 0x78, 0xB8,  </span><br><span class="line">  0x63, 0x9E, 0x5B, 0x3D, 0xD9, 0x28, 0x3F, 0xC8, 0x73, 0x06,  </span><br><span class="line">  0xEE, 0x6B, 0x8D, 0x0C, 0x4B, 0xA3, 0x23, 0xAE, 0xCA, 0x40,  </span><br><span class="line">  0xED, 0xD1] # 加密key  </span><br><span class="line">key = b&#x27;testkey&#x27;     # 加密方法  </span><br><span class="line">key1=ARC4.new(key)  </span><br><span class="line">print(key1.encrypt(bytes(encrypt_data)))         # 解密方法  </span><br><span class="line">flag = b&#x27;\n\r\x06\x1c\x1fTVSWQ\x00\x03\x1d\x14XV\x03\x19\x1c\x00T\x03K\x14X\x07\x02IL\x02\x07\x01Q\x0c\x08\x00\x01\x00\x03\x00O&#125;&#x27;  </span><br><span class="line"># 将 flag 转换为 list，便于修改  </span><br><span class="line">flag = list(flag)  </span><br><span class="line">for i in range(len(flag)-1,0,-1):  </span><br><span class="line">    flag[i-1] ^= flag[i]  </span><br><span class="line">    print(chr(flag[i]),end=&#x27;&#x27;)  </span><br><span class="line">chr_flag=&#x27;&#125;22110084edca-dfa9-fe11-47a9-033b5f0d&#123;gal&#x27;  </span><br><span class="line">print(chr_flag[::-1])</span><br><span class="line">#lag&#123;d0f5b330-9a74-11ef-9afd-acde48001122&#125;</span><br></pre></td></tr></table></figure>
 <p>少了个f 在前面加上就是正确的flag</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>2024领航杯本科组 RE wp</title>
+    <url>/2025/01/02/2024%E9%A2%86%E8%88%AA%E6%9D%AF-%E6%9C%AC%E7%A7%91%E7%BB%84Re-wp/</url>
+    <content><![CDATA[<h1 id="ezsystd"><a href="#ezsystd" class="headerlink" title="ezsystd"></a>ezsystd</h1><p>jadx打开文件 找到主函数</p>
+<span id="more"></span>
+
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd.png" alt="本科组 easystd-1"></p>
+<p>分析 主要的判断在check</p>
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd-1.png" alt="本科组 easystd-1"></p>
+<p>调用本地native 所以分析native层 ida打开libcma.so 进入sub_904函数 发现一个类似sbox的数组</p>
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd-6.png" alt="本科组 easystd-6"></p>
+<p>跟7异或 跑一下异或之后的sbox</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a = [ 0xD1, 0x97, 0xEE, 0xF9, 0xCB, 0xE6, 0x3A, 0xB0, 0x11, 0xB1]  </span><br><span class="line">for i in range(len(a)):  </span><br><span class="line">    a[i]^=7  </span><br><span class="line">    print(hex(a[i]),end=&#x27; &#x27;)</span><br><span class="line">#0xd6 0x90 0xe9 0xfe 0xcc 0xe1 0x3d 0xb7 0x16 0xb6</span><br></pre></td></tr></table></figure>
+
+<p>发现是sm4的sbox 而且轮数也是32轮 所以猜测是sm4加密 找密文和密钥<br>跟进sub_75C函数 在最下面找到密文byte_C14</p>
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd-5.png" alt="本科组 easystd-5"></p>
+<p>密钥在这个地方</p>
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd-7.png" alt="本科组 easystd-7"></p>
+<p>跟进之后可以发现是将后八位替换为0x5A30303939383634</p>
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd-8.png" alt="本科组 easystd-8"></p>
+<p>注意是小端序存储 所以密钥应该是A11223574689900Z 扔赛博厨子里跑一下</p>
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd-9.png" alt="本科组 easystd-9"></p>
+<p>得到flag</p>
+<p><img src="/../images/%E6%9C%AC%E7%A7%91%E7%BB%84easystd-10.png" alt="本科组 easystd-10"></p>
 ]]></content>
   </entry>
   <entry>
