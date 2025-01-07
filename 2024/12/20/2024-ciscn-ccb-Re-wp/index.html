@@ -36,8 +36,18 @@
 <meta property="og:image" content="http://patr1ck-s.github.io/images/image6-1734689981410-11.png">
 <meta property="og:image" content="http://patr1ck-s.github.io/images/image7-1734689987048-13.png">
 <meta property="og:image" content="http://patr1ck-s.github.io/images/image8-1734689992869-15.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-4.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-5.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-6.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-7.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-8.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/kiwi-9.png">
 <meta property="article:published_time" content="2024-12-20T06:21:15.000Z">
-<meta property="article:modified_time" content="2025-01-02T04:37:53.790Z">
+<meta property="article:modified_time" content="2025-01-07T09:40:43.252Z">
 <meta property="article:author" content="Patr1ck">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://patr1ck-s.github.io/images/image1-1734689935552-1.png">
@@ -148,7 +158,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dump"><span class="nav-number">1.</span> <span class="nav-text">dump</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ezCsky"><span class="nav-number">2.</span> <span class="nav-text">ezCsky</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#dump"><span class="nav-number">1.</span> <span class="nav-text">dump</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ezCsky"><span class="nav-number">2.</span> <span class="nav-text">ezCsky</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kiwi"><span class="nav-number">3.</span> <span class="nav-text">kiwi</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -227,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-01-02 12:37:53" itemprop="dateModified" datetime="2025-01-02T12:37:53+08:00">2025-01-02</time>
+      <time title="修改时间：2025-01-07 17:40:43" itemprop="dateModified" datetime="2025-01-07T17:40:43+08:00">2025-01-07</time>
     </span>
 
   
@@ -244,14 +254,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.4k</span>
+      <span>5.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -290,6 +300,19 @@
 <p>猜测进行了异或 但是最后一位没有异或 所以猜测加密的异或可能是<br>flag[i]^&#x3D;flag[i+1]<br>直接写逆向脚本即可</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from Crypto.Cipher import ARC4  </span><br><span class="line">encrypt_data= [0x96, 0x8F, 0xB8, 0x08, 0x5D, 0xA7, 0x68, 0x44, 0xF2, 0x64,  </span><br><span class="line">  0x92, 0x64, 0x42, 0x7A, 0x78, 0xE6, 0xEA, 0xC2, 0x78, 0xB8,  </span><br><span class="line">  0x63, 0x9E, 0x5B, 0x3D, 0xD9, 0x28, 0x3F, 0xC8, 0x73, 0x06,  </span><br><span class="line">  0xEE, 0x6B, 0x8D, 0x0C, 0x4B, 0xA3, 0x23, 0xAE, 0xCA, 0x40,  </span><br><span class="line">  0xED, 0xD1] # 加密key  </span><br><span class="line">key = b&#x27;testkey&#x27;     # 加密方法  </span><br><span class="line">key1=ARC4.new(key)  </span><br><span class="line">print(key1.encrypt(bytes(encrypt_data)))         # 解密方法  </span><br><span class="line">flag = b&#x27;\n\r\x06\x1c\x1fTVSWQ\x00\x03\x1d\x14XV\x03\x19\x1c\x00T\x03K\x14X\x07\x02IL\x02\x07\x01Q\x0c\x08\x00\x01\x00\x03\x00O&#125;&#x27;  </span><br><span class="line"># 将 flag 转换为 list，便于修改  </span><br><span class="line">flag = list(flag)  </span><br><span class="line">for i in range(len(flag)-1,0,-1):  </span><br><span class="line">    flag[i-1] ^= flag[i]  </span><br><span class="line">    print(chr(flag[i]),end=&#x27;&#x27;)  </span><br><span class="line">chr_flag=&#x27;&#125;22110084edca-dfa9-fe11-47a9-033b5f0d&#123;gal&#x27;  </span><br><span class="line">print(chr_flag[::-1])</span><br><span class="line">#lag&#123;d0f5b330-9a74-11ef-9afd-acde48001122&#125;</span><br></pre></td></tr></table></figure>
 <p>少了个f 在前面加上就是正确的flag</p>
+<h1 id="kiwi"><a href="#kiwi" class="headerlink" title="kiwi"></a>kiwi</h1><p>打开附件 给了一个流量包和一个exe程序 分析一下exe<br><img src="/../images/kiwi.png" alt="kiwi"></p>
+<p>跟进一下sub_140082974<br>首先根据word_140111152生成了一个伪随机数 起调试取出来 是0x69<br><img src="/../images/kiwi-1.png" alt="kiwi-1"><br>交叉引用这个伪随机数发现下面进行了异或 并且和随机数进行相加<br><img src="/../images/kiwi-2.png" alt="kiwi-2"></p>
+<p>起调试取出随机数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x7d, 0x2e, 0x10, 0x3d, 0x2d, 0x27, 0x44, 0x79, 0x27, 0x69, 0x33, 0x55, 0x5c, 0x2d, 0x7a, 0x4, 0x2, 0x65, 0x16,  0x22, 0x14, 0x2d, 0x4, 0x47, 0x1a, 0x7f, 0x26, 0x5b, 0x2a, 0x26, 0x69, 0x2c, 0x2f, 0x75, 0x25, 0x3d, 0x69, 0x38,  0x45, 0x62, 0x35, 0x6b, 0x27, 0x9, 0xf, 0x2a, 0x46, 0x5b, 0x55, 0x69, 0x16, 0x4, 0x4d, 0x65, 0x2f, 0x4e, 0x6a, 0x5a, 0x2e, 0x75, 0x4b, 0x77, 0x58, 0x37, 0x5, 0xf, 0x1, 0x2a, 0x22, 0x11, 0x2d, 0x52, 0x6a, 0x3a, 0x74, 0x73,  0x61, 0x9, 0x2b, 0x24, 0x10, 0x74, 0x40, 0x25, 0x8, 0x59, 0x66, 0x72, 0x25, 0x37, 0x72, 0x18, 0x10, 0x1e, 0x5, 0x48, 0x7, 0x64, 0x6c, 0x2a, 0x61, 0x1a, 0x44, 0x73, 0x4c, 0x3e, 0x62, 0x3a, 0x5a, 0x32, 0x72, 0x8, 0x3c, 0x6d,  0x5d, 0x2e, 0x4d, 0x71, 0x71, 0x5b, 0x52, 0x7d, 0x3c, 0x6d, 0x7f, 0x3, 0x38, 0x8, 0x3e, 0x5c, 0x2e, 0x65, 0x2d,  0x3b, 0x54, 0x6d, 0x65, 0x60, 0x38, 0x7, 0x2, 0xe, 0x62, 0x2e, 0x60, 0x3e, 0x35, 0x46, 0x22, 0x15, 0x17, 0x30, 0x79, 0x14, 0x52, 0x1c, 0x23, 0xf, 0x39, 0x1e, 0x31, 0x60, 0xe, 0x5, 0xe, 0x5c, 0x23, 0x68, 0x3d, 0x6, 0x40, 0x1, 0x62, 0x3, 0x45, 0x3e, 0x4, 0x4e, 0x10, 0x16</span><br></pre></td></tr></table></figure>
+<p>最后是一个变表的base64<br><img src="/../images/kiwi-3.png" alt="kiwi-3"><br>写个脚本提取一下码表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import idaapi</span><br><span class="line">import idautils</span><br><span class="line">import idc</span><br><span class="line">start = 0x140111070</span><br><span class="line">end = 0x1401110EE</span><br><span class="line">for addr in range(start, end + 1):</span><br><span class="line">    byte = idaapi.get_byte(addr)</span><br><span class="line">    if 32 &lt;= byte &lt;= 126:</span><br><span class="line">        print(chr(byte), end=&quot;&quot;)</span><br></pre></td></tr></table></figure>
+<p><img src="/../images/kiwi-4.png" alt="kiwi-4"></p>
+<p>得到码表为d+F3DwWj8tUckVGZb57S1XsLqfm0vnpeMEzQ2Bg&#x2F;PTrohxluiJCRIYAyH6N4aKO9<br>所以总的逻辑就是密文异或0x69加上随机数然后base64换表编码<br>随后看sub_140082774函数 发现密文是流量包的upload流<br><img src="/../images/kiwi-5.png" alt="kiwi-5"></p>
+<p>去流量包里找一下<br><img src="/../images/kiwi-6.png" alt="kiwi-6"></p>
+<p>发现密文<br>先解码一下<br><img src="/../images/kiwi-7.png" alt="kiwi-7"></p>
+<p>然后写个脚本解密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">enc = [0xb9, 0x48, 0x1c, 0x58, 0x81, 0x4f, 0x51, 0x7d, 0x27, 0x70, 0x33, 0x6f, 0x79, 0x48, 0x82, 0x21,  </span><br><span class="line">       0x08, 0x80, 0x79, 0x49, 0x51, 0x52, 0x28, 0x9b, 0x7d, 0xbb, 0x40, 0x67, 0x45, 0x7a, 0x96, 0x38,  </span><br><span class="line">       0x3e, 0x7d, 0x41, 0x42, 0x86, 0x60, 0x4f, 0x6c, 0x3b, 0x87, 0x2e, 0x26, 0x72, 0x51, 0x83, 0x80,  </span><br><span class="line">       0x79, 0xbd, 0x79, 0x40, 0x67, 0x71, 0x4a, 0xa2, 0x98, 0x76, 0x3a, 0x8f, 0x68, 0xda, 0x7f, 0x74,  </span><br><span class="line">       0x2a, 0x33, 0x55, 0x8d, 0x5e, 0x2b, 0x39, 0x6d, 0xbe, 0x5f, 0x74, 0x74, 0x7d, 0x11, 0x8e, 0x4b,  </span><br><span class="line">       0x4d, 0x99, 0x64, 0x79, 0x63, 0xb3, 0x73, 0xca, 0x31, 0x90, 0xc3, 0x77, 0x1b, 0x6f, 0x61, 0x52,  </span><br><span class="line">       0x11, 0xbc, 0xbd, 0x86, 0xb2, 0x78, 0x4f, 0x7e, 0x56, 0x8f, 0x6c, 0x94, 0xb4, 0x3a, 0x7f, 0x14,  </span><br><span class="line">       0x4b, 0x79, 0xb6, 0x8c, 0xb0, 0xad, 0x8b, 0x67, 0x6d, 0xd1, 0x7a, 0x9a, 0xa7, 0x31, 0x74, 0x25,  </span><br><span class="line">       0x3e, 0x61, 0x2e, 0x82, 0x3d, 0x63, 0x5e, 0x77, 0x6b, 0x7c, 0x3f, 0x24, 0x65, 0x35, 0x9f, 0x53,  </span><br><span class="line">       0x84, 0x92, 0x42, 0xa0, 0x7d, 0x66, 0x70, 0x3b, 0xd3, 0x65, 0xa2, 0x6d, 0x7f, 0x19, 0x92, 0x7a,  </span><br><span class="line">       0x8c, 0xb8, 0x6b, 0x12, 0x18, 0x66, 0x74, 0xc0, 0x48, 0x64, 0x9d, 0x0e, 0x6f, 0x53, 0x96, 0x49,  </span><br><span class="line">       0x61, 0x5d]  </span><br><span class="line">sub = [0x7d, 0x2e, 0x10, 0x3d, 0x2d, 0x27, 0x44, 0x79, 0x27, 0x69, 0x33, 0x55, 0x5c, 0x2d, 0x7a, 0x4, 0x2, 0x65, 0x16,  </span><br><span class="line">       0x22, 0x14, 0x2d, 0x4, 0x47, 0x1a, 0x7f, 0x26, 0x5b, 0x2a, 0x26, 0x69, 0x2c, 0x2f, 0x75, 0x25, 0x3d, 0x69, 0x38,  </span><br><span class="line">       0x45, 0x62, 0x35, 0x6b, 0x27, 0x9, 0xf, 0x2a, 0x46, 0x5b, 0x55, 0x69, 0x16, 0x4, 0x4d, 0x65, 0x2f, 0x4e, 0x6a,  </span><br><span class="line">       0x5a, 0x2e, 0x75, 0x4b, 0x77, 0x58, 0x37, 0x5, 0xf, 0x1, 0x2a, 0x22, 0x11, 0x2d, 0x52, 0x6a, 0x3a, 0x74, 0x73,  </span><br><span class="line">       0x61, 0x9, 0x2b, 0x24, 0x10, 0x74, 0x40, 0x25, 0x8, 0x59, 0x66, 0x72, 0x25, 0x37, 0x72, 0x18, 0x10, 0x1e, 0x5,  </span><br><span class="line">       0x48, 0x7, 0x64, 0x6c, 0x2a, 0x61, 0x1a, 0x44, 0x73, 0x4c, 0x3e, 0x62, 0x3a, 0x5a, 0x32, 0x72, 0x8, 0x3c, 0x6d,  </span><br><span class="line">       0x5d, 0x2e, 0x4d, 0x71, 0x71, 0x5b, 0x52, 0x7d, 0x3c, 0x6d, 0x7f, 0x3, 0x38, 0x8, 0x3e, 0x5c, 0x2e, 0x65, 0x2d,  </span><br><span class="line">       0x3b, 0x54, 0x6d, 0x65, 0x60, 0x38, 0x7, 0x2, 0xe, 0x62, 0x2e, 0x60, 0x3e, 0x35, 0x46, 0x22, 0x15, 0x17, 0x30,  </span><br><span class="line">       0x79, 0x14, 0x52, 0x1c, 0x23, 0xf, 0x39, 0x1e, 0x31, 0x60, 0xe, 0x5, 0xe, 0x5c, 0x23, 0x68, 0x3d, 0x6, 0x40, 0x1,  </span><br><span class="line">       0x62, 0x3, 0x45, 0x3e, 0x4, 0x4e, 0x10, 0x16]  </span><br><span class="line">sand = 0x69  </span><br><span class="line">flag = []  </span><br><span class="line">for i in range(len(enc)):  </span><br><span class="line">    flag.append(((enc[i] - sub[i]) ^ sand))  </span><br><span class="line">    print(chr(flag[i]), end=&#x27;&#x27;)</span><br></pre></td></tr></table></figure>
+<p><img src="/../images/kiwi-8.png" alt="kiwi-8"><br>找个在线网站解一下Lihua的NTML即可<br><img src="/../images/kiwi-9.png" alt="kiwi-9"><br>flag{memeallme!}</p>
 
     </div>
 
@@ -342,14 +365,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">13k</span>
+    <span title="站点总字数">16k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">12 分钟</span>
+    <span title="站点阅读时长">15 分钟</span>
   </span>
 </div>
 <div class="busuanzi-count">
