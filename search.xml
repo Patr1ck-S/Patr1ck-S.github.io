@@ -135,4 +135,35 @@
     <content><![CDATA[<p>各位师傅好 我是一名ctfer Re选手 隶属于某不知名小战队 活跃在各大比赛之中 最近想进阶一下自己的逆向技术 <span id="more"></span><br>整理了各大比赛的Re题目 并在近期准备学习一下 不会的题目稍后复现 在此期间也想学习pwn的一些知识 所以这个博客记录一下这些Re题目的wp 也作为一个pwn知识笔记 后续参加各大比赛和公开赛的wp也会放在这里 以便自己学习和参考 也希望有地方可以帮助到各位师傅</p>
 ]]></content>
   </entry>
+  <entry>
+    <title>2025 ccsssc RE wp</title>
+    <url>/2025/01/05/2025-ccsssc-RE-wp/</url>
+    <content><![CDATA[<p><strong>前言：还是太菜了 三个RE就出了一个┭┮﹏┭┮ 算是个二血？</strong></p>
+<h1 id="donntyousee"><a href="#donntyousee" class="headerlink" title="donntyousee"></a>donntyousee</h1><p>ida打开附件 发现有很多retn花 从start的汇编开始一点一点往下去花 </p>
+<span id="more"></span>
+
+<p><img src="/../images/donntyousee-1.png" alt="donntyousee-1"></p>
+<p><img src="/../images/donntyousee-2.png" alt="donntyousee-2"></p>
+<p><img src="/../images/donntyousee-3.png" alt="donntyousee-3"></p>
+<p><img src="/../images/donntyousee-4.png" alt="donntyousee-4"></p>
+<p><img src="/../images/donntyousee-5.png" alt="donntyousee-5"></p>
+<p><img src="/../images/donntyousee-6.png" alt="donntyousee-6"></p>
+<p><img src="/../images/donntyousee-7.png" alt="donntyousee-7"></p>
+<p>花都去差不多之后 开始看代码</p>
+<p><img src="/../images/donntyousee-8.png" alt="donntyousee-8"></p>
+<p>RC4密钥流生成 继续往下看</p>
+<p><img src="/../images/donntyousee-9.png" alt="donntyousee-9"></p>
+<p>RC4加密</p>
+<p><img src="/../images/donntyousee-10.png" alt="donntyousee-10"></p>
+<p>找到密文数据 dump下来 注意小端序<br>25CD54AF511C58D3A84B4F56EC835DD4F6474A6FE073B0A5A8C317815E2BF4F671EA2FFFA8639957</p>
+<p><img src="/../images/donntyousee-11.png" alt="donntyousee-11"></p>
+<p>异或0x23</p>
+<p><img src="/../images/donntyousee-12.png" alt="donntyousee-12"></p>
+<p>前十三位是密钥 异或0x45 起个调试dump下来<br>D7596E5AFFBEE7BA422C38325DC9<br>赛博厨子跑一下 发现解不开</p>
+<p><img src="/../images/donntyousee-13.png" alt="donntyousee-13"></p>
+<p>所以密钥应该是有问题 猜测可能有个反调试会修改密钥 使其进行异或 那么直接取出来密钥就好<br>921C2B1FBAFBA2FF07697D77188C</p>
+<p><img src="/../images/donntyousee-14.png" alt="donntyousee-14"></p>
+<p>拿到flag</p>
+]]></content>
+  </entry>
 </search>
