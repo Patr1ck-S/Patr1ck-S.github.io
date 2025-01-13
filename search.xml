@@ -4,10 +4,10 @@
     <title>2024 ciscn&amp;ccb RE wp</title>
     <url>/2024/12/20/2024-ciscn-ccb-Re-wp/</url>
     <content><![CDATA[<h1 id="dump"><a href="#dump" class="headerlink" title="dump"></a>dump</h1><p>运行程序 输入几个字符 观察回显</p>
-<p><img src="/../images/image1-1734689935552-1.png" alt="image1"></p>
-<p>随后看了一下flag头的映射</p>
 <span id="more"></span>
 
+<p><img src="/../images/image1-1734689935552-1.png" alt="image1"></p>
+<p>随后看了一下flag头的映射</p>
 <p><img src="/../images/image2-1734689953905-3.png" alt="image2"></p>
 <p>跟flag的前几位一样</p>
 <p><img src="/../images/image3-1734689962295-5.png" alt="image3"></p>
@@ -177,6 +177,84 @@
 <p>所以密钥应该是有问题 猜测可能有个反调试会修改密钥 使其进行异或 那么直接取出来密钥就好<br>921C2B1FBAFBA2FF07697D77188C</p>
 <p><img src="/../images/donntyousee-14.png" alt="donntyousee-14"></p>
 <p>拿到flag</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>2024 春秋杯夏季赛 RE wp</title>
+    <url>/2025/01/13/2024-%E6%98%A5%E7%A7%8B%E6%9D%AF%E5%A4%8F%E5%AD%A3%E8%B5%9B-Re-wp/</url>
+    <content><![CDATA[<p><strong>前言：这两天做了一下去年春秋杯夏季赛的RE 难度不是很大 知识面涉及的很广 希望今年的冬季赛也可以多做出来几个题</strong></p>
+<h1 id="snake"><a href="#snake" class="headerlink" title="snake"></a>snake</h1><p>python的exe程序 环境python3.8解包即可 把snake.pyc扔在线反编译里看一下 发现是一个RC4加密 最后异或的地方加了个跟循环次数的异或</p>
+<span id="more"></span>
+
+<p><img src="/../images/snake.png" alt="snake"></p>
+<p>密文已知 在反编译一下key.pyc 找到密钥V3rY_v3Ry_Ez 直接写脚本解密即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">def KSA(key):  </span><br><span class="line">    S = list(range(256))  </span><br><span class="line">    j = 0  </span><br><span class="line">    for i in range(256):  </span><br><span class="line">        j = (j + S[i] + key[i % len(key)]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">    return S  </span><br><span class="line">  </span><br><span class="line">def PRGA(S):  </span><br><span class="line">    i, j = 0, 0  </span><br><span class="line">    while True:  </span><br><span class="line">        i = (i + 1) % 256  </span><br><span class="line">        j = (j + S[i]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">        K = S[(S[i] + S[j]) % 256]  </span><br><span class="line">        yield K  </span><br><span class="line">  </span><br><span class="line">def RC4(key, text):  </span><br><span class="line">    S = KSA(key)  </span><br><span class="line">    keystram = PRGA(S)  </span><br><span class="line">    res = []  </span><br><span class="line">    for i, char in enumerate(text):  </span><br><span class="line">        res.append(i ^ char ^ next(keystram))  </span><br><span class="line">    return bytes(res)  </span><br><span class="line">  </span><br><span class="line">key = b&#x27;V3rY_v3Ry_Ez&#x27;  </span><br><span class="line">plaintext = [101, 97, 39, 125, 218, 172, 205, 3, 235, 195, 72, 125, 89, 130, </span><br><span class="line">             103, 213, 120, 227, 193, 67, 174, 71, 162, 248, 244, 12, 238,  </span><br><span class="line">             92, 160, 203, 185, 155]  </span><br><span class="line">ciphertext = RC4(key, plaintext)  </span><br><span class="line">print(ciphertext)</span><br><span class="line">#b&#x27;flag&#123;KMLTz3lT_MePUDa7A_P5LpzCBT&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h1 id="HardSignin"><a href="#HardSignin" class="headerlink" title="HardSignin"></a>HardSignin</h1><p>打开附件 发现修改了UPX的特征码 010打开修改回去然后脱壳</p>
+<p><img src="/../images/HardSignin.png" alt="HardSignin"></p>
+<p>ida打开附件 main的函数看不出来什么逻辑</p>
+<p><img src="/../images/HardSignin-1.png" alt="HardSignin-1"></p>
+<p>发现TLS函数 跟进交叉引用一下</p>
+<p><img src="/../images/HardSignin-2.png" alt="HardSignin-2"></p>
+<p>发现花指令 去除</p>
+<p><img src="/../images/HardSignin-3.png" alt="HardSignin-3"></p>
+<p><img src="/../images/HardSignin-8.png" alt="HardSignin-8"></p>
+<p><img src="/../images/HardSignin-9.png" alt="HardSignin-9"></p>
+<p>随后分析一下逻辑<br>TLS0是个smc 把main函数跟0x66异或 设置第一个随机数种子 用于TLS1生成变换的码表</p>
+<p><img src="/../images/HardSignin-6.png" alt="HardSignin-6"></p>
+<p>写个脚本解密一下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">lpAddress = 0x00401890</span><br><span class="line">dwSize = 170</span><br><span class="line">for i in range(170):</span><br><span class="line">    main = (get_wide_byte(lpAddress + i)) ^ 0x66</span><br><span class="line">    patch_byte(lpAddress + i , main)</span><br></pre></td></tr></table></figure>
+
+<p>成功恢复main函数</p>
+<p><img src="/../images/HardSignin-7.png" alt="HardSignin-7"></p>
+<p>随后看TLS1<br>进行了一个码表的变换 设置第二个随机数种子 用于TLS2生成rc4的key和xtea的key</p>
+<p><img src="/../images/HardSignin-10.png" alt="HardSignin-10"></p>
+<p>TLS2是进行了两个数的生成 交叉引用可以知道分别是rc4的key和xtea的key</p>
+<p><img src="/../images/HardSignin-13.png" alt="HardSignin-13"></p>
+<p>这几个函数都有反调试 直接patch即可<br>然后看主函数 逻辑很清晰 对密文进行base64换表编码 随后RC4加密 最后xtea加密</p>
+<p><img src="/../images/HardSignin-12.png" alt="HardSignin-12"></p>
+<p>xtea魔改了一下 轮数是100</p>
+<p><img src="/../images/HardSignin-14.png" alt="HardSignin-14"></p>
+<p>密文就是下面比对的unk_374000<br>我这里不知道为什么调试总是起不来 猜测可能是因为smc我手动解密之后 他TLS0重新跑了一次 把main函数异或回去了 所以索性静态写个脚本 跑一下key和变换后的base码表</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">void swap(char *a1, char *a2)</span><br><span class="line">&#123;</span><br><span class="line">    char v3;</span><br><span class="line">    v3 = *a1;</span><br><span class="line">    *a1 = *a2;</span><br><span class="line">    *a2 = v3;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char table[] = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;</span><br><span class="line">    srand(0x114514u);</span><br><span class="line">    for (int i = 0; i &lt; 100; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int v3 = rand() % 64;</span><br><span class="line">        int v5 = rand() % 64;</span><br><span class="line">        swap(&amp;table[v3], &amp;table[v5]);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%s\n&quot;, table);</span><br><span class="line">    srand(0x1919810u);</span><br><span class="line">    for (int j = 0; j &lt; 16; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        int rc4_key = rand() % 255;</span><br><span class="line">        int xtea_key = rand() % 255;</span><br><span class="line">        printf(&quot;%d,%d\n&quot;, rc4_key, xtea_key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">new_table=4yZRiNP8LoK/GSA5ElWkUjXtJCz7bMYcuFfpm6+hV0rxeHIdwv32QOTnqg1BDsa9</span><br><span class="line">rc4_key=[118, 137, 51, 73, 25, 19, 195, 199, 173, 216, 228, 104, 252, 72, 4, 188]</span><br><span class="line">xtea_key=[221, 91, 170, 12, 36, 105, 132, 214, 184, 30, 4, 81, 6, 171, 42, 139]</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>得到rc4_key和xtea_key的key后 已知密文 直接写脚本解密即可<br>先解xtea</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">void xtea_decrypt(unsigned int round, uint32_t enc[2], uint32_t key[4])</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    unsigned int j;  // [esp+4Ch] [ebp-18h]</span><br><span class="line">    unsigned int v5; // [esp+54h] [ebp-10h]</span><br><span class="line">    unsigned int v6; // [esp+58h] [ebp-Ch]</span><br><span class="line">    unsigned int v7; // [esp+5Ch] [ebp-8h]</span><br><span class="line">    v7 = enc[0];</span><br><span class="line">    v6 = enc[1];</span><br><span class="line">    v5 = 0 - round * 0x61C88647;</span><br><span class="line">    for (j = 0; j &lt; round; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        v6 -= (key[((v5 &gt;&gt; 11) &amp; 3)] + v5) ^ (v7 + ((v7 &gt;&gt; 5) ^ (16 * v7)));</span><br><span class="line">        v5 += 0x61C88647;</span><br><span class="line">        v7 -= (key[((v5 &amp; 3))]) + v5 ^ (v6 + ((v6 &gt;&gt; 5) ^ (16 * v6)));</span><br><span class="line">    &#125;</span><br><span class="line">    enc[0] = v7;</span><br><span class="line">    enc[1] = v6;</span><br><span class="line">&#125;</span><br><span class="line">unsigned char enc[] = &#123;0x59, 0x1B, 0xFD, 0xB4, 0x6B, 0xB8, 0xBE, 0xD9, 0xB3, 0xD3, 0x77, 0xD6, 0xF0, 0x65, 0x5F, 0x18,0xA0, 0x9D, 0x3A, 0x53, 0x6D, 0x4A, 0x7B, 0x26, 0x74, 0x3A, 0x9C, 0x4E, 0x20, 0x43, 0x19, 0xD8, 0x72, 0xED, 0x95, 0xB5, 0x9C, 0x05, 0x22, 0x56, 0xCB, 0x7A, 0x11, 0x91, 0x9F, 0x7A, 0xBC, 0x0C,0x4A, 0x69, 0x6D, 0xCE, 0x3D, 0xB4, 0xAB, 0x29, 0x61, 0xFA, 0x62, 0x32, 0xB4, 0xEC, 0x4C, 0xB6, 0x00&#125;;</span><br><span class="line">    uint32_t xtea_key[] = &#123;0x0CAA5BDD, 0xD6846924, 0x51041EB8, 0x8B2AAB06&#125;;</span><br><span class="line">    for (int k = 0; k &lt; sizeof(enc) / 8; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        xtea_decrypt(100, (uint32_t*)enc + k * 2, xtea_key);</span><br><span class="line">    &#125;</span><br><span class="line">    for (int m = 0; m &lt; 64; m++)</span><br><span class="line">        printf(&quot;0x%x,&quot;, enc[m]);</span><br></pre></td></tr></table></figure>
+
+<p>得到RC4的密文<br>0xbc 0xed 0x0 0x7b 0x86 0xf4 0x16 0x93 0x95 0xf9 0x87 0xdc 0x67 0xa8 0xa2 0x7f 0x4d 0xe2 0x62 0x9f 0x7b 0x34 0xae 0xe9 0x45 0x3 0x7e 0x35 0x42 0xd0 0x8b 0x70 0xf0 0xfb 0x2e 0xc7 0xdd 0xe9 0xb9 0x73 0xe3 0xcc 0x1a 0x75 0xad 0xdc 0xfd 0x14 0xa8 0xc8 0x45 0x16 0x31 0x6e 0x2a 0x8 0x2c 0xf 0x1d 0x9f 0x7 0xba 0xd5 0xef</p>
+<p>随后解密RC4 + 换表base64</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import base64  </span><br><span class="line">import string  </span><br><span class="line">#RC4解密  </span><br><span class="line">def ksa(key):  </span><br><span class="line">    S = list(range(256))  </span><br><span class="line">    j = 0  </span><br><span class="line">    key_length = len(key)  </span><br><span class="line">  </span><br><span class="line">    for i in range(256):  </span><br><span class="line">        j = (j + S[i] + key[i % key_length]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">  </span><br><span class="line">    return S  </span><br><span class="line">  </span><br><span class="line">def prga(S, length):  </span><br><span class="line">    i = j = 0  </span><br><span class="line">    keystream = []  </span><br><span class="line">    for _ in range(length):  </span><br><span class="line">        i = (i + 1) % 256  </span><br><span class="line">        j = (j + S[i]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">        keystream.append(S[(S[i] + S[j]) % 256])  </span><br><span class="line">    return keystream  </span><br><span class="line">def rc4(key, plaintext):  </span><br><span class="line">    S = ksa(key)  </span><br><span class="line">    keystream = prga(S, len(plaintext))  </span><br><span class="line">    return bytes([p ^ k for p, k in zip(plaintext, keystream)])  </span><br><span class="line">key = [118, 137, 51, 73, 25, 19, 195, 199, 173, 216, 228, 104, 252, 72, 4, 188]  </span><br><span class="line">ciphertext = [0xbc,0xed,0x0,0x7b,0x86,0xf4,0x16,0x93,0x95,0xf9,0x87,0xdc,0x67,0xa8,0xa2,0x7f,0x4d,0xe2,0x62,0x9f,0x7b,0x34,0xae,0xe9,0x45,0x3,0x7e,0x35,0x42,0xd0,0x8b,0x70,0xf0,0xfb,0x2e,0xc7,0xdd,0xe9,0xb9,0x73,0xe3,0xcc,0x1a,0x75,0xad,0xdc,0xfd,0x14,0xa8,0xc8,0x45,0x16,0x31,0x6e,0x2a,0x8,0x2c,0xf,0x1d,0x9f,0x7,0xba,0xd5,0xef]  </span><br><span class="line">decrypted = rc4(key, ciphertext)  </span><br><span class="line">print(decrypted)  </span><br><span class="line">#base64换表  </span><br><span class="line">string = &quot;C+vFCnHRGPghbmyQMXvFMRNd7fNCG8jcU+jcbnjRJTj2GTCOGUvgtOS0CTge7fNs&quot;  </span><br><span class="line">tableBase64 = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;  </span><br><span class="line">tableNew =    &quot;4yZRiNP8LoK/GSA5ElWkUjXtJCz7bMYcuFfpm6+hV0rxeHIdwv32QOTnqg1BDsa9&quot;  </span><br><span class="line">flag = base64.b64decode(string.translate(str.maketrans(tableNew, tableBase64)))  </span><br><span class="line">print (flag)</span><br><span class="line">#b&#x27;flag&#123;C0ngr@tulat1on!Y0u_Re_suCces3fu1Ly_Signln!&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h1 id="bedtea"><a href="#bedtea" class="headerlink" title="bedtea"></a>bedtea</h1><p>ida打开附件 进入main函数<br>前面是两个反调试 还有输入的部分</p>
+<p><img src="/../images/bedtea.png" alt="bedtea"></p>
+<p>看下面的那个反调试 如果检测到调试是1 没检测到调试是3<br>随后往下看 发现有三个魔改的tea 修改了轮数 delta还有移位等常量值</p>
+<p><img src="/../images/bedtea-1.png" alt="bedtea-1"></p>
+<p><img src="/../images/bedtea-2.png" alt="bedtea-2"></p>
+<p>上面有个斐波那契数列计算tea的key </p>
+<p><img src="/../images/bedtea-3.png" alt="bedtea-3"></p>
+<p>起个调试取出三个key 注意把第一个调试的值改为3才会生成正确的key</p>
+<p><img src="/../images/bedtea-4.png" alt="bedtea-4"></p>
+<p>第一组key：3,5,8,13</p>
+<p><img src="/../images/bedtea-6.png" alt="bedtea-6"></p>
+<p>第二组key：0x15,0x22,0x37,0x59</p>
+<p><img src="/../images/bedtea-7.png" alt="bedtea-7"></p>
+<p>第三组key：0x90,0xE9,0x179,0x262</p>
+<p><img src="/../images/bedtea-8.png" alt="bedtea-8"></p>
+<p>随后通过二叉树对数据进行处理 这个地方的逻辑静态看有点费劲 直接动态对比数据即可</p>
+<p><img src="/../images/bedtea-9.png" alt="bedtea-9"></p>
+<p><img src="/../images/bedtea-10.png" alt="bedtea-10"></p>
+<p>发现对数据进行倒叙处理<br>中间一堆看不懂的代码 经过动态调试 发现是跟0x33异或</p>
+<p><img src="/../images/bedtea-12.png" alt="bedtea-12"></p>
+<p>这里过一个时间的反调试 通过汇编可以看出函数在这个地方会进行跳转</p>
+<p><img src="/../images/bedtea-13.png" alt="bedtea-13"></p>
+<p>所以把zf值置为1即可过掉反调试<br>最后的地方存放三段密文</p>
+<p><img src="/../images/bedtea-11.png" alt="bedtea-11"></p>
+<p>总的逻辑就是 先tea 然后倒置 最后异或0x33<br>直接写逆向脚本解密即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">void tea_decrypt(uint32_t *v, uint32_t *key)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    uint32_t v0 = v[0], v1 = v[1], delta = 0x61CBB648, i, k0 = key[0], k1 = key[1], k2 = key[2], k3 = key[3];</span><br><span class="line">    unsigned int sum = 0x987E55D0;</span><br><span class="line">    do</span><br><span class="line">    &#123;</span><br><span class="line">        v1 -= (sum + v0) ^ (k3 + (v0 &gt;&gt; 4)) ^ (k2 + 32 * v0);</span><br><span class="line">        v0 -= (sum + v1) ^ (k1 + (v1 &gt;&gt; 4)) ^ (k0 + 32 * v1);</span><br><span class="line">        sum += 0x61CBB648;</span><br><span class="line">    &#125; while (sum != 0);</span><br><span class="line">    v[0] = v0, v[1] = v1;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    unsigned char rev;</span><br><span class="line">    unsigned char enc[] = &#123;0x76, 0x71, 0x9D, 0xE7, 0x70,</span><br><span class="line">                           0x77, 0x3F, 0xA3, 0x02, 0xF1,</span><br><span class="line">                           0x8D, 0xC9, 0x02, 0xC6, 0xA2,</span><br><span class="line">                           0x4B, 0xBA, 0x19, 0x56, 0x05,</span><br><span class="line">                           0xF2, 0x89, 0x5E, 0xE0&#125;;</span><br><span class="line">    unsigned int key1[] = &#123;3, 5, 8, 13&#125;;</span><br><span class="line">    unsigned int key2[] = &#123;0x15, 0x22, 0x37, 0x59&#125;;</span><br><span class="line">    unsigned int key3[] = &#123;0x90, 0xE9, 0x179, 0x262&#125;;</span><br><span class="line">    //xor 0x33</span><br><span class="line">    for (int i = 0; i &lt; 24; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        enc[i] ^= 0x33;</span><br><span class="line">    &#125;</span><br><span class="line">    //reverse</span><br><span class="line">    for (int j = 0; j &lt; 12; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        rev = enc[j];</span><br><span class="line">        enc[j] = enc[23 - j];</span><br><span class="line">        enc[23 - j] = rev;</span><br><span class="line">    &#125;</span><br><span class="line">    //tea decrypt</span><br><span class="line">    uint32_t *flag1 = (uint32_t *)&amp;enc[0];</span><br><span class="line">    uint32_t *flag2 = (uint32_t *)&amp;enc[8];</span><br><span class="line">    uint32_t *flag3 = (uint32_t *)&amp;enc[16];</span><br><span class="line">    tea_decrypt(flag1, key1);</span><br><span class="line">    tea_decrypt(flag2, key2);</span><br><span class="line">    tea_decrypt(flag3, key3);</span><br><span class="line">    for (int k = 0; k &lt; 24; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%c&quot;, enc[k]);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//flag&#123;y0u_reallyl1ke_te@&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
 ]]></content>
   </entry>
 </search>

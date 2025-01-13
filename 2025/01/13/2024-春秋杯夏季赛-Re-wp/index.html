@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="referrer" content="no-referrer" />
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"patr1ck-s.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言：这两天做了一下去年春秋杯夏季赛的RE 难度不是很大 知识面涉及的很广 希望今年的冬季赛也可以多做出来几个题 snakepython的exe程序 环境python3.8解包即可 把snake.pyc扔在线反编译里看一下 发现是一个RC4加密 最后异或的地方加了个跟循环次数的异或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2024 春秋杯夏季赛 RE wp">
+<meta property="og:url" content="http://patr1ck-s.github.io/2025/01/13/2024-%E6%98%A5%E7%A7%8B%E6%9D%AF%E5%A4%8F%E5%AD%A3%E8%B5%9B-Re-wp/index.html">
+<meta property="og:site_name" content="Patr1ck&#39;s blog">
+<meta property="og:description" content="前言：这两天做了一下去年春秋杯夏季赛的RE 难度不是很大 知识面涉及的很广 希望今年的冬季赛也可以多做出来几个题 snakepython的exe程序 环境python3.8解包即可 把snake.pyc扔在线反编译里看一下 发现是一个RC4加密 最后异或的地方加了个跟循环次数的异或">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/snake.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-8.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-9.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-6.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-7.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-10.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-13.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-12.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/HardSignin-14.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-4.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-6.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-7.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-8.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-9.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-10.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-12.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-13.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/bedtea-11.png">
+<meta property="article:published_time" content="2025-01-13T11:31:21.000Z">
+<meta property="article:modified_time" content="2025-01-13T11:50:38.722Z">
+<meta property="article:author" content="Patr1ck">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://patr1ck-s.github.io/images/snake.png">
+
+
+<link rel="canonical" href="http://patr1ck-s.github.io/2025/01/13/2024-%E6%98%A5%E7%A7%8B%E6%9D%AF%E5%A4%8F%E5%AD%A3%E8%B5%9B-Re-wp/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://patr1ck-s.github.io/2025/01/13/2024-%E6%98%A5%E7%A7%8B%E6%9D%AF%E5%A4%8F%E5%AD%A3%E8%B5%9B-Re-wp/","path":"2025/01/13/2024-春秋杯夏季赛-Re-wp/","title":"2024 春秋杯夏季赛 RE wp"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2024 春秋杯夏季赛 RE wp | Patr1ck's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Patr1ck's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#snake"><span class="nav-number">1.</span> <span class="nav-text">snake</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HardSignin"><span class="nav-number">2.</span> <span class="nav-text">HardSignin</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bedtea"><span class="nav-number">3.</span> <span class="nav-text">bedtea</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patr1ck"
+      src="/images/yzbpdx.png">
+  <p class="site-author-name" itemprop="name">Patr1ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://patr1ck-s.github.io/2025/01/13/2024-%E6%98%A5%E7%A7%8B%E6%9D%AF%E5%A4%8F%E5%AD%A3%E8%B5%9B-Re-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yzbpdx.png">
+      <meta itemprop="name" content="Patr1ck">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2024 春秋杯夏季赛 RE wp | Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2024 春秋杯夏季赛 RE wp
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-13 19:31:21 / 修改时间：19:50:38" itemprop="dateCreated datePublished" datetime="2025-01-13T19:31:21+08:00">2025-01-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>前言：这两天做了一下去年春秋杯夏季赛的RE 难度不是很大 知识面涉及的很广 希望今年的冬季赛也可以多做出来几个题</strong></p>
+<h1 id="snake"><a href="#snake" class="headerlink" title="snake"></a>snake</h1><p>python的exe程序 环境python3.8解包即可 把snake.pyc扔在线反编译里看一下 发现是一个RC4加密 最后异或的地方加了个跟循环次数的异或</p>
+<span id="more"></span>
+
+<p><img src="/../images/snake.png" alt="snake"></p>
+<p>密文已知 在反编译一下key.pyc 找到密钥V3rY_v3Ry_Ez 直接写脚本解密即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">def KSA(key):  </span><br><span class="line">    S = list(range(256))  </span><br><span class="line">    j = 0  </span><br><span class="line">    for i in range(256):  </span><br><span class="line">        j = (j + S[i] + key[i % len(key)]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">    return S  </span><br><span class="line">  </span><br><span class="line">def PRGA(S):  </span><br><span class="line">    i, j = 0, 0  </span><br><span class="line">    while True:  </span><br><span class="line">        i = (i + 1) % 256  </span><br><span class="line">        j = (j + S[i]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">        K = S[(S[i] + S[j]) % 256]  </span><br><span class="line">        yield K  </span><br><span class="line">  </span><br><span class="line">def RC4(key, text):  </span><br><span class="line">    S = KSA(key)  </span><br><span class="line">    keystram = PRGA(S)  </span><br><span class="line">    res = []  </span><br><span class="line">    for i, char in enumerate(text):  </span><br><span class="line">        res.append(i ^ char ^ next(keystram))  </span><br><span class="line">    return bytes(res)  </span><br><span class="line">  </span><br><span class="line">key = b&#x27;V3rY_v3Ry_Ez&#x27;  </span><br><span class="line">plaintext = [101, 97, 39, 125, 218, 172, 205, 3, 235, 195, 72, 125, 89, 130, </span><br><span class="line">             103, 213, 120, 227, 193, 67, 174, 71, 162, 248, 244, 12, 238,  </span><br><span class="line">             92, 160, 203, 185, 155]  </span><br><span class="line">ciphertext = RC4(key, plaintext)  </span><br><span class="line">print(ciphertext)</span><br><span class="line">#b&#x27;flag&#123;KMLTz3lT_MePUDa7A_P5LpzCBT&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h1 id="HardSignin"><a href="#HardSignin" class="headerlink" title="HardSignin"></a>HardSignin</h1><p>打开附件 发现修改了UPX的特征码 010打开修改回去然后脱壳</p>
+<p><img src="/../images/HardSignin.png" alt="HardSignin"></p>
+<p>ida打开附件 main的函数看不出来什么逻辑</p>
+<p><img src="/../images/HardSignin-1.png" alt="HardSignin-1"></p>
+<p>发现TLS函数 跟进交叉引用一下</p>
+<p><img src="/../images/HardSignin-2.png" alt="HardSignin-2"></p>
+<p>发现花指令 去除</p>
+<p><img src="/../images/HardSignin-3.png" alt="HardSignin-3"></p>
+<p><img src="/../images/HardSignin-8.png" alt="HardSignin-8"></p>
+<p><img src="/../images/HardSignin-9.png" alt="HardSignin-9"></p>
+<p>随后分析一下逻辑<br>TLS0是个smc 把main函数跟0x66异或 设置第一个随机数种子 用于TLS1生成变换的码表</p>
+<p><img src="/../images/HardSignin-6.png" alt="HardSignin-6"></p>
+<p>写个脚本解密一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lpAddress = 0x00401890</span><br><span class="line">dwSize = 170</span><br><span class="line">for i in range(170):</span><br><span class="line">    main = (get_wide_byte(lpAddress + i)) ^ 0x66</span><br><span class="line">    patch_byte(lpAddress + i , main)</span><br></pre></td></tr></table></figure>
+
+<p>成功恢复main函数</p>
+<p><img src="/../images/HardSignin-7.png" alt="HardSignin-7"></p>
+<p>随后看TLS1<br>进行了一个码表的变换 设置第二个随机数种子 用于TLS2生成rc4的key和xtea的key</p>
+<p><img src="/../images/HardSignin-10.png" alt="HardSignin-10"></p>
+<p>TLS2是进行了两个数的生成 交叉引用可以知道分别是rc4的key和xtea的key</p>
+<p><img src="/../images/HardSignin-13.png" alt="HardSignin-13"></p>
+<p>这几个函数都有反调试 直接patch即可<br>然后看主函数 逻辑很清晰 对密文进行base64换表编码 随后RC4加密 最后xtea加密</p>
+<p><img src="/../images/HardSignin-12.png" alt="HardSignin-12"></p>
+<p>xtea魔改了一下 轮数是100</p>
+<p><img src="/../images/HardSignin-14.png" alt="HardSignin-14"></p>
+<p>密文就是下面比对的unk_374000<br>我这里不知道为什么调试总是起不来 猜测可能是因为smc我手动解密之后 他TLS0重新跑了一次 把main函数异或回去了 所以索性静态写个脚本 跑一下key和变换后的base码表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">void swap(char *a1, char *a2)</span><br><span class="line">&#123;</span><br><span class="line">    char v3;</span><br><span class="line">    v3 = *a1;</span><br><span class="line">    *a1 = *a2;</span><br><span class="line">    *a2 = v3;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char table[] = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;;</span><br><span class="line">    srand(0x114514u);</span><br><span class="line">    for (int i = 0; i &lt; 100; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int v3 = rand() % 64;</span><br><span class="line">        int v5 = rand() % 64;</span><br><span class="line">        swap(&amp;table[v3], &amp;table[v5]);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%s\n&quot;, table);</span><br><span class="line">    srand(0x1919810u);</span><br><span class="line">    for (int j = 0; j &lt; 16; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        int rc4_key = rand() % 255;</span><br><span class="line">        int xtea_key = rand() % 255;</span><br><span class="line">        printf(&quot;%d,%d\n&quot;, rc4_key, xtea_key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">new_table=4yZRiNP8LoK/GSA5ElWkUjXtJCz7bMYcuFfpm6+hV0rxeHIdwv32QOTnqg1BDsa9</span><br><span class="line">rc4_key=[118, 137, 51, 73, 25, 19, 195, 199, 173, 216, 228, 104, 252, 72, 4, 188]</span><br><span class="line">xtea_key=[221, 91, 170, 12, 36, 105, 132, 214, 184, 30, 4, 81, 6, 171, 42, 139]</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>得到rc4_key和xtea_key的key后 已知密文 直接写脚本解密即可<br>先解xtea</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">void xtea_decrypt(unsigned int round, uint32_t enc[2], uint32_t key[4])</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    unsigned int j;  // [esp+4Ch] [ebp-18h]</span><br><span class="line">    unsigned int v5; // [esp+54h] [ebp-10h]</span><br><span class="line">    unsigned int v6; // [esp+58h] [ebp-Ch]</span><br><span class="line">    unsigned int v7; // [esp+5Ch] [ebp-8h]</span><br><span class="line">    v7 = enc[0];</span><br><span class="line">    v6 = enc[1];</span><br><span class="line">    v5 = 0 - round * 0x61C88647;</span><br><span class="line">    for (j = 0; j &lt; round; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        v6 -= (key[((v5 &gt;&gt; 11) &amp; 3)] + v5) ^ (v7 + ((v7 &gt;&gt; 5) ^ (16 * v7)));</span><br><span class="line">        v5 += 0x61C88647;</span><br><span class="line">        v7 -= (key[((v5 &amp; 3))]) + v5 ^ (v6 + ((v6 &gt;&gt; 5) ^ (16 * v6)));</span><br><span class="line">    &#125;</span><br><span class="line">    enc[0] = v7;</span><br><span class="line">    enc[1] = v6;</span><br><span class="line">&#125;</span><br><span class="line">unsigned char enc[] = &#123;0x59, 0x1B, 0xFD, 0xB4, 0x6B, 0xB8, 0xBE, 0xD9, 0xB3, 0xD3, 0x77, 0xD6, 0xF0, 0x65, 0x5F, 0x18,0xA0, 0x9D, 0x3A, 0x53, 0x6D, 0x4A, 0x7B, 0x26, 0x74, 0x3A, 0x9C, 0x4E, 0x20, 0x43, 0x19, 0xD8, 0x72, 0xED, 0x95, 0xB5, 0x9C, 0x05, 0x22, 0x56, 0xCB, 0x7A, 0x11, 0x91, 0x9F, 0x7A, 0xBC, 0x0C,0x4A, 0x69, 0x6D, 0xCE, 0x3D, 0xB4, 0xAB, 0x29, 0x61, 0xFA, 0x62, 0x32, 0xB4, 0xEC, 0x4C, 0xB6, 0x00&#125;;</span><br><span class="line">    uint32_t xtea_key[] = &#123;0x0CAA5BDD, 0xD6846924, 0x51041EB8, 0x8B2AAB06&#125;;</span><br><span class="line">    for (int k = 0; k &lt; sizeof(enc) / 8; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        xtea_decrypt(100, (uint32_t*)enc + k * 2, xtea_key);</span><br><span class="line">    &#125;</span><br><span class="line">    for (int m = 0; m &lt; 64; m++)</span><br><span class="line">        printf(&quot;0x%x,&quot;, enc[m]);</span><br></pre></td></tr></table></figure>
+
+<p>得到RC4的密文<br>0xbc 0xed 0x0 0x7b 0x86 0xf4 0x16 0x93 0x95 0xf9 0x87 0xdc 0x67 0xa8 0xa2 0x7f 0x4d 0xe2 0x62 0x9f 0x7b 0x34 0xae 0xe9 0x45 0x3 0x7e 0x35 0x42 0xd0 0x8b 0x70 0xf0 0xfb 0x2e 0xc7 0xdd 0xe9 0xb9 0x73 0xe3 0xcc 0x1a 0x75 0xad 0xdc 0xfd 0x14 0xa8 0xc8 0x45 0x16 0x31 0x6e 0x2a 0x8 0x2c 0xf 0x1d 0x9f 0x7 0xba 0xd5 0xef</p>
+<p>随后解密RC4 + 换表base64</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import base64  </span><br><span class="line">import string  </span><br><span class="line">#RC4解密  </span><br><span class="line">def ksa(key):  </span><br><span class="line">    S = list(range(256))  </span><br><span class="line">    j = 0  </span><br><span class="line">    key_length = len(key)  </span><br><span class="line">  </span><br><span class="line">    for i in range(256):  </span><br><span class="line">        j = (j + S[i] + key[i % key_length]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">  </span><br><span class="line">    return S  </span><br><span class="line">  </span><br><span class="line">def prga(S, length):  </span><br><span class="line">    i = j = 0  </span><br><span class="line">    keystream = []  </span><br><span class="line">    for _ in range(length):  </span><br><span class="line">        i = (i + 1) % 256  </span><br><span class="line">        j = (j + S[i]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">        keystream.append(S[(S[i] + S[j]) % 256])  </span><br><span class="line">    return keystream  </span><br><span class="line">def rc4(key, plaintext):  </span><br><span class="line">    S = ksa(key)  </span><br><span class="line">    keystream = prga(S, len(plaintext))  </span><br><span class="line">    return bytes([p ^ k for p, k in zip(plaintext, keystream)])  </span><br><span class="line">key = [118, 137, 51, 73, 25, 19, 195, 199, 173, 216, 228, 104, 252, 72, 4, 188]  </span><br><span class="line">ciphertext = [0xbc,0xed,0x0,0x7b,0x86,0xf4,0x16,0x93,0x95,0xf9,0x87,0xdc,0x67,0xa8,0xa2,0x7f,0x4d,0xe2,0x62,0x9f,0x7b,0x34,0xae,0xe9,0x45,0x3,0x7e,0x35,0x42,0xd0,0x8b,0x70,0xf0,0xfb,0x2e,0xc7,0xdd,0xe9,0xb9,0x73,0xe3,0xcc,0x1a,0x75,0xad,0xdc,0xfd,0x14,0xa8,0xc8,0x45,0x16,0x31,0x6e,0x2a,0x8,0x2c,0xf,0x1d,0x9f,0x7,0xba,0xd5,0xef]  </span><br><span class="line">decrypted = rc4(key, ciphertext)  </span><br><span class="line">print(decrypted)  </span><br><span class="line">#base64换表  </span><br><span class="line">string = &quot;C+vFCnHRGPghbmyQMXvFMRNd7fNCG8jcU+jcbnjRJTj2GTCOGUvgtOS0CTge7fNs&quot;  </span><br><span class="line">tableBase64 = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;  </span><br><span class="line">tableNew =    &quot;4yZRiNP8LoK/GSA5ElWkUjXtJCz7bMYcuFfpm6+hV0rxeHIdwv32QOTnqg1BDsa9&quot;  </span><br><span class="line">flag = base64.b64decode(string.translate(str.maketrans(tableNew, tableBase64)))  </span><br><span class="line">print (flag)</span><br><span class="line">#b&#x27;flag&#123;C0ngr@tulat1on!Y0u_Re_suCces3fu1Ly_Signln!&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h1 id="bedtea"><a href="#bedtea" class="headerlink" title="bedtea"></a>bedtea</h1><p>ida打开附件 进入main函数<br>前面是两个反调试 还有输入的部分</p>
+<p><img src="/../images/bedtea.png" alt="bedtea"></p>
+<p>看下面的那个反调试 如果检测到调试是1 没检测到调试是3<br>随后往下看 发现有三个魔改的tea 修改了轮数 delta还有移位等常量值</p>
+<p><img src="/../images/bedtea-1.png" alt="bedtea-1"></p>
+<p><img src="/../images/bedtea-2.png" alt="bedtea-2"></p>
+<p>上面有个斐波那契数列计算tea的key </p>
+<p><img src="/../images/bedtea-3.png" alt="bedtea-3"></p>
+<p>起个调试取出三个key 注意把第一个调试的值改为3才会生成正确的key</p>
+<p><img src="/../images/bedtea-4.png" alt="bedtea-4"></p>
+<p>第一组key：3,5,8,13</p>
+<p><img src="/../images/bedtea-6.png" alt="bedtea-6"></p>
+<p>第二组key：0x15,0x22,0x37,0x59</p>
+<p><img src="/../images/bedtea-7.png" alt="bedtea-7"></p>
+<p>第三组key：0x90,0xE9,0x179,0x262</p>
+<p><img src="/../images/bedtea-8.png" alt="bedtea-8"></p>
+<p>随后通过二叉树对数据进行处理 这个地方的逻辑静态看有点费劲 直接动态对比数据即可</p>
+<p><img src="/../images/bedtea-9.png" alt="bedtea-9"></p>
+<p><img src="/../images/bedtea-10.png" alt="bedtea-10"></p>
+<p>发现对数据进行倒叙处理<br>中间一堆看不懂的代码 经过动态调试 发现是跟0x33异或</p>
+<p><img src="/../images/bedtea-12.png" alt="bedtea-12"></p>
+<p>这里过一个时间的反调试 通过汇编可以看出函数在这个地方会进行跳转</p>
+<p><img src="/../images/bedtea-13.png" alt="bedtea-13"></p>
+<p>所以把zf值置为1即可过掉反调试<br>最后的地方存放三段密文</p>
+<p><img src="/../images/bedtea-11.png" alt="bedtea-11"></p>
+<p>总的逻辑就是 先tea 然后倒置 最后异或0x33<br>直接写逆向脚本解密即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">void tea_decrypt(uint32_t *v, uint32_t *key)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    uint32_t v0 = v[0], v1 = v[1], delta = 0x61CBB648, i, k0 = key[0], k1 = key[1], k2 = key[2], k3 = key[3];</span><br><span class="line">    unsigned int sum = 0x987E55D0;</span><br><span class="line">    do</span><br><span class="line">    &#123;</span><br><span class="line">        v1 -= (sum + v0) ^ (k3 + (v0 &gt;&gt; 4)) ^ (k2 + 32 * v0);</span><br><span class="line">        v0 -= (sum + v1) ^ (k1 + (v1 &gt;&gt; 4)) ^ (k0 + 32 * v1);</span><br><span class="line">        sum += 0x61CBB648;</span><br><span class="line">    &#125; while (sum != 0);</span><br><span class="line">    v[0] = v0, v[1] = v1;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    unsigned char rev;</span><br><span class="line">    unsigned char enc[] = &#123;0x76, 0x71, 0x9D, 0xE7, 0x70,</span><br><span class="line">                           0x77, 0x3F, 0xA3, 0x02, 0xF1,</span><br><span class="line">                           0x8D, 0xC9, 0x02, 0xC6, 0xA2,</span><br><span class="line">                           0x4B, 0xBA, 0x19, 0x56, 0x05,</span><br><span class="line">                           0xF2, 0x89, 0x5E, 0xE0&#125;;</span><br><span class="line">    unsigned int key1[] = &#123;3, 5, 8, 13&#125;;</span><br><span class="line">    unsigned int key2[] = &#123;0x15, 0x22, 0x37, 0x59&#125;;</span><br><span class="line">    unsigned int key3[] = &#123;0x90, 0xE9, 0x179, 0x262&#125;;</span><br><span class="line">    //xor 0x33</span><br><span class="line">    for (int i = 0; i &lt; 24; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        enc[i] ^= 0x33;</span><br><span class="line">    &#125;</span><br><span class="line">    //reverse</span><br><span class="line">    for (int j = 0; j &lt; 12; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        rev = enc[j];</span><br><span class="line">        enc[j] = enc[23 - j];</span><br><span class="line">        enc[23 - j] = rev;</span><br><span class="line">    &#125;</span><br><span class="line">    //tea decrypt</span><br><span class="line">    uint32_t *flag1 = (uint32_t *)&amp;enc[0];</span><br><span class="line">    uint32_t *flag2 = (uint32_t *)&amp;enc[8];</span><br><span class="line">    uint32_t *flag3 = (uint32_t *)&amp;enc[16];</span><br><span class="line">    tea_decrypt(flag1, key1);</span><br><span class="line">    tea_decrypt(flag2, key2);</span><br><span class="line">    tea_decrypt(flag3, key3);</span><br><span class="line">    for (int k = 0; k &lt; 24; k++)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%c&quot;, enc[k]);</span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//flag&#123;y0u_reallyl1ke_te@&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/05/2025-ccsssc-RE-wp/" rel="prev" title="2025 ccsssc RE wp">
+                  <i class="fa fa-angle-left"></i> 2025 ccsssc RE wp
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Patr1ck</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">23k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">21 分钟</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
