@@ -382,4 +382,42 @@
 
 ]]></content>
   </entry>
+  <entry>
+    <title>2025 第一届启航杯 RE wp</title>
+    <url>/2025/01/27/2025-%E7%AC%AC%E4%B8%80%E5%B1%8A%E5%90%AF%E8%88%AA%E6%9D%AF-RE-wp/</url>
+    <content><![CDATA[<p><strong>前言：明天过年了 提前祝各位师傅新年快乐 新的一年所有比赛都能AK！</strong></p>
+<h1 id="rainbow"><a href="#rainbow" class="headerlink" title="rainbow"></a>rainbow</h1><p>ida打开附件 发现关键函数</p>
+<span id="more"></span>
+
+<p><img src="/../images/rainbow.png" alt="rainbow"></p>
+<p>跟进发现主要逻辑就是一个xor 90</p>
+<p><img src="/../images/rainbow-1.png" alt="rainbow-1"></p>
+<p>密文压缩包里给了 直接赛博厨子跑一下得到flag</p>
+<p><img src="/../images/rainbow-2.png" alt="rainbow-2"></p>
+<p>QHCTF{a8226103-5a9a-4fa7-abcf-dea438a7ce78}</p>
+<h1 id="小明的note"><a href="#小明的note" class="headerlink" title="小明的note"></a>小明的note</h1><p>查壳发现有upx壳 upx -d脱掉</p>
+<p><img src="/../images/note.png" alt="note"></p>
+<p>ida打开附件 发现逻辑就是将输入的flag跟s2作比较</p>
+<p><img src="/../images/note-1.png" alt="note-1"></p>
+<p>而s2在上一个函数跟dest和v6做了xor的运算</p>
+<p><img src="/../images/note-2.png" alt="note-2"></p>
+<p>所以直接起调试 在比较的地方下个断点 直接看s2的值即可</p>
+<p><img src="/../images/note-4.png" alt="note-4"></p>
+<p><img src="/../images/note-5.png" alt="note-5"></p>
+<p>或者也可以模拟一下decrypt的逻辑写一个脚本解密一下s2</p>
+<p>密文</p>
+<p><img src="/../images/note-3.png" alt="note-3"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">enc = [  </span><br><span class="line">    0x12, 0x7D, 0xE1, 0x2C, 0x01, 0x4A, 0xC4, 0x45, 0x78, 0x5E,  </span><br><span class="line">    0xC9, 0x46, 0x78, 0x5D, 0x83, 0x0F, 0x37, 0x12, 0xD0, 0x45,  </span><br><span class="line">    0x63, 0x42, 0xD5, 0x57, 0x76, 0x14, 0xDE, 0x06, 0x6E, 0x04,  </span><br><span class="line">    0x8F, 0x3E, 0x50, 0x21, 0xE1, 0x3B, 0x53, 0x72, 0xB7, 0x6C,  </span><br><span class="line">    0x5D, 0x79, 0xF7  </span><br><span class="line">]  </span><br><span class="line">key = 0x7CA13742  </span><br><span class="line">flag = []  </span><br><span class="line">for i in range(len(enc)):  </span><br><span class="line">    flag.append((key &gt;&gt; ((i % 4) * 8)) &amp; 0xFF ^ enc[i])  </span><br><span class="line">    flag[i] ^= (i + 1)  </span><br><span class="line">    print(chr(flag[i]), end=&#x27;&#x27;)</span><br><span class="line">#QHCTF&#123;b13cc67d-cd7b-4cc3-9df1-1b34cc4c186d&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="checker"><a href="#checker" class="headerlink" title="checker"></a>checker</h1><p>ida打开附件 发现主要函数</p>
+<p><img src="/../images/checker.png" alt="checker"></p>
+<p>跟进可以发现逻辑就是对输入的flag进行异或0x23</p>
+<p><img src="/../images/checker-1.png" alt="checker-1"></p>
+<p>密文</p>
+<p><img src="/../images/checker-2.png" alt="checker-2"></p>
+<p>直接异或回去即可</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">enc = [0x72, 0x6B, 0x60, 0x77, 0x65, 0x58, 0x46, 0x46, 0x15, 0x40,  </span><br><span class="line">       0x14, 0x41, 0x1A, 0x40, 0x0E, 0x46, 0x14, 0x45, 0x16, 0x0E,  </span><br><span class="line">       0x17, 0x45, 0x42, 0x41, 0x0E, 0x1A, 0x41, 0x47, 0x45, 0x0E,  </span><br><span class="line">       0x46, 0x42, 0x13, 0x14, 0x46, 0x13, 0x10, 0x17, 0x45, 0x15,  </span><br><span class="line">       0x42, 0x16, 0x5E]  </span><br><span class="line">for i in range(len(enc)):  </span><br><span class="line">    enc[i] ^= 0x23  </span><br><span class="line">    print(chr(enc[i]), end=&#x27;&#x27;)</span><br><span class="line">#QHCTF&#123;ee6c7b9c-e7f5-4fab-9bdf-ea07e034f6a5&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
 </search>
