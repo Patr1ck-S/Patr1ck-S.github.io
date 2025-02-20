@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="referrer" content="no-referrer" />
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"patr1ck-s.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Break the Battalion签到题 ida打开附件 逻辑就是跟0x50异或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025 BroncoCTF RE wp">
+<meta property="og:url" content="http://patr1ck-s.github.io/2025/02/17/2025-BroncoCTF-RE-wp/index.html">
+<meta property="og:site_name" content="Patr1ck&#39;s blog">
+<meta property="og:description" content="Break the Battalion签到题 ida打开附件 逻辑就是跟0x50异或">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/BreaktheBattalion-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/BreaktheBattalion.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/BreaktheBattalion-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/BreaktheBattalion-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/ReversingforOphidiophiles.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/sus.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/ActualReversing.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/ActualReversing-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/ActualReversing-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/ActualReversing-3.png">
+<meta property="article:published_time" content="2025-02-16T19:42:41.000Z">
+<meta property="article:modified_time" content="2025-02-16T19:54:14.300Z">
+<meta property="article:author" content="Patr1ck">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://patr1ck-s.github.io/images/BreaktheBattalion-1.png">
+
+
+<link rel="canonical" href="http://patr1ck-s.github.io/2025/02/17/2025-BroncoCTF-RE-wp/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://patr1ck-s.github.io/2025/02/17/2025-BroncoCTF-RE-wp/","path":"2025/02/17/2025-BroncoCTF-RE-wp/","title":"2025 BroncoCTF RE wp"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2025 BroncoCTF RE wp | Patr1ck's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Patr1ck's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Break-the-Battalion"><span class="nav-number">1.</span> <span class="nav-text">Break the Battalion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reversing-for-Ophidiophiles"><span class="nav-number">2.</span> <span class="nav-text">Reversing for Ophidiophiles</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#theflagishere"><span class="nav-number">3.</span> <span class="nav-text">theflagishere!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sus"><span class="nav-number">4.</span> <span class="nav-text">sus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Actual-Reversing"><span class="nav-number">5.</span> <span class="nav-text">Actual Reversing</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patr1ck"
+      src="/images/yzbpdx.png">
+  <p class="site-author-name" itemprop="name">Patr1ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://patr1ck-s.github.io/2025/02/17/2025-BroncoCTF-RE-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yzbpdx.png">
+      <meta itemprop="name" content="Patr1ck">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2025 BroncoCTF RE wp | Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2025 BroncoCTF RE wp
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-17 03:42:41 / 修改时间：03:54:14" itemprop="dateCreated datePublished" datetime="2025-02-17T03:42:41+08:00">2025-02-17</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>6.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>6 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Break-the-Battalion"><a href="#Break-the-Battalion" class="headerlink" title="Break the Battalion"></a>Break the Battalion</h1><p>签到题 ida打开附件 逻辑就是跟0x50异或</p>
+<span id="more"></span>
+
+<p><img src="/../images/BreaktheBattalion-1.png" alt="BreaktheBattalion-1"></p>
+<p>密文是brigade</p>
+<p><img src="/../images/BreaktheBattalion.png" alt="BreaktheBattalion"></p>
+<p>赛博厨子跑一下得到flag</p>
+<p><img src="/../images/BreaktheBattalion-2.png" alt="BreaktheBattalion-2"></p>
+<p><img src="/../images/BreaktheBattalion-3.png" alt="BreaktheBattalion-3"></p>
+<p>bronco{2&quot;97145}</p>
+<h1 id="Reversing-for-Ophidiophiles"><a href="#Reversing-for-Ophidiophiles" class="headerlink" title="Reversing for Ophidiophiles"></a>Reversing for Ophidiophiles</h1><p>附件给了加密和key 先加在异或 </p>
+<p><img src="/../images/ReversingforOphidiophiles.png" alt="ReversingforOphidiophiles"></p>
+<p>题目描述给了密文 23a326c27bee9b40885df97007aa4dbe410e93<br>直接写脚本即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">enc = &#x27;23a326c27bee9b40885df97007aa4dbe410e93&#x27;  </span><br><span class="line">enc_bytes = bytes.fromhex(enc)  </span><br><span class="line">key = &#x27;Awesome!&#x27;  </span><br><span class="line">carry = 0  </span><br><span class="line">flag = []  </span><br><span class="line">for i, val in enumerate(enc_bytes):  </span><br><span class="line">    val ^= ord(key[i % len(key)])  </span><br><span class="line">    val -= carry  </span><br><span class="line">    val %= 256  </span><br><span class="line">    flag.append(chr(val))  </span><br><span class="line">    carry += val  </span><br><span class="line">    carry %= 256  </span><br><span class="line">print(&quot;&quot;.join(flag))</span><br><span class="line">#bronco&#123;charge_away&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="theflagishere"><a href="#theflagishere" class="headerlink" title="theflagishere!"></a>theflagishere!</h1><p>pyc的逆向 找个在线网站反编译一下 直接扔给deepseek跑一下 得到flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"># 计算各个字符函数的结果并调整ASCII值  </span><br><span class="line">def get_flag():  </span><br><span class="line">    flag = [&#x27;&#x27;] * 11  # 假设flag长度为11  </span><br><span class="line">  </span><br><span class="line">    # char_0 → 0号位  </span><br><span class="line">    flag[0] = chr(ord(char_0()) - 1)  </span><br><span class="line">  </span><br><span class="line">    # char_1_4_6 → 1、4、6号位  </span><br><span class="line">    c = chr(ord(char_1_4_6()) - 1)  </span><br><span class="line">    flag[1] = flag[4] = flag[6] = c  </span><br><span class="line">  </span><br><span class="line">    # char_2_5_9 → 2、5、9号位  </span><br><span class="line">    c = chr(ord(char_2_5_9()) - 1)  </span><br><span class="line">    flag[2] = flag[5] = flag[9] = c  </span><br><span class="line">  </span><br><span class="line">    # char_3 → 3号位  </span><br><span class="line">    flag[3] = char_3()  </span><br><span class="line">  </span><br><span class="line">    # char_7 → 7号位  </span><br><span class="line">    flag[7] = chr(ord(char_7()) - 1)  </span><br><span class="line">  </span><br><span class="line">    # char_8 → 8号位  </span><br><span class="line">    flag[8] = chr(ord(char_8()) - 1)  </span><br><span class="line">  </span><br><span class="line">    # char_10 → 10号位  </span><br><span class="line">    flag[10] = chr(ord(char_10()) - 1)  </span><br><span class="line">  </span><br><span class="line">    return &#x27;&#x27;.join(flag)  </span><br><span class="line">    </span><br><span class="line"># char_0 → &#x27;j&#x27; → &#x27;i&#x27;  </span><br><span class="line"># char_1_4_6 → &#x27;`&#x27; → &#x27;_&#x27;  </span><br><span class="line"># char_2_5_9 → &#x27;b&#x27; → &#x27;a&#x27;  </span><br><span class="line"># char_3 → &#x27;m&#x27;  </span><br><span class="line"># char_7 → &#x27;g&#x27; → &#x27;f&#x27;  </span><br><span class="line"># char_8 → &#x27;m&#x27; → &#x27;l&#x27;  </span><br><span class="line"># char_10 → &#x27;h&#x27; → &#x27;g&#x27;  </span><br><span class="line">  </span><br><span class="line">flag = &quot;i_am_a_flag&quot;  </span><br><span class="line">print(flag)</span><br><span class="line">#bronco&#123;i_am_a_flag&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="sus"><a href="#sus" class="headerlink" title="sus"></a>sus</h1><p>打开附件 得到的是一堆自定义的宏 将标准的C++关键字和标识符替换为非标准的术语进行混淆</p>
+<p><img src="/../images/sus.png" alt="sus"></p>
+<p>借助AI还原一下原来大概的代码 随后手动修改一下 逻辑大概是cook函数通过调用rando so_rando L high函数对初始化的字符串进行解密 一共解密八次 解密一次恢复一个字符 手动修复一下AI复原的代码 直接运行即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">#include&lt;cstdlib&gt;</span><br><span class="line"></span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line"></span><br><span class="line">#include&lt;string&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// 定义 Flag 类</span><br><span class="line"></span><br><span class="line">class Flag &#123;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    string flag = &quot;bronco&#123;abcdefgh&#125;&quot;;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// 定义 sigmas 数组</span><br><span class="line"></span><br><span class="line">int sigmas[10][4] = &#123;</span><br><span class="line"></span><br><span class="line">    &#123;354, 859, 63143, 63863&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;441, 1117, 1074, 1612&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;491, 877, 7979, 1331&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;518, 859, 63143, 63863&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;204, 859, 631, 6386&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;197, 967, 223647, 5423434&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;69, 223, 5632, 4195&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;226, 1013, 71733, 29271&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;10, 211, 6314, 6386&#125;,</span><br><span class="line"></span><br><span class="line">    &#123;504, 599, 7454, 7049&#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// 声明 flag 对象</span><br><span class="line"></span><br><span class="line">Flag flag;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// rando 函数，用于处理某些数值计算</span><br><span class="line"></span><br><span class="line">int rando(int yeet) &#123;</span><br><span class="line"></span><br><span class="line">    int giving = 0;</span><br><span class="line"></span><br><span class="line">    int bet = 0;</span><br><span class="line"></span><br><span class="line">    for (int i = 1; ; i++) &#123;</span><br><span class="line"></span><br><span class="line">        if (yeet &lt; pow(10, giving)) &#123;</span><br><span class="line"></span><br><span class="line">            break;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        giving += 1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    yeet *= yeet ;</span><br><span class="line"></span><br><span class="line">    if ( giving % 2 == 0 )</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        yeet *= 10 ;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    string iykyk;</span><br><span class="line"></span><br><span class="line">    for (int bet = 0; yeet &gt; 0; yeet /= 10, bet++) &#123;</span><br><span class="line"></span><br><span class="line">        if (bet &gt; giving / 2) &#123;</span><br><span class="line"></span><br><span class="line">            if (bet - 1 &lt; giving / 2 + giving) &#123;</span><br><span class="line"></span><br><span class="line">                iykyk.insert(0, 1, &#x27;0&#x27; + yeet % 10);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    for (int bet = 0; giving &gt; 0; giving--, bet++) &#123;</span><br><span class="line"></span><br><span class="line">        yeet += (iykyk[giving - 1] - &#x27;0&#x27;) * pow(10, bet);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    return yeet;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//decode函数，用于解密</span><br><span class="line"></span><br><span class="line">int decode(int yeet) &#123;</span><br><span class="line"></span><br><span class="line">    int giving = 0;</span><br><span class="line"></span><br><span class="line">    int bet = 0;</span><br><span class="line"></span><br><span class="line">    for (int i = 1; ; i++) &#123;</span><br><span class="line"></span><br><span class="line">        if (yeet &lt; pow(10, giving)) &#123;</span><br><span class="line"></span><br><span class="line">            break;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        giving += 1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    yeet *= yeet ;</span><br><span class="line"></span><br><span class="line">    if ( giving % 2 == 0 )</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        yeet *= 10 ;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    string iykyk = to_string(yeet).substr(giving - 1, giving);</span><br><span class="line"></span><br><span class="line">    return stoi(iykyk);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// L 函数</span><br><span class="line"></span><br><span class="line">int L(int plus,int ratio, int _plus, int blocked) &#123;</span><br><span class="line"></span><br><span class="line">    int dubs = (ratio * blocked + _plus) % plus;</span><br><span class="line"></span><br><span class="line">    return dubs;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// high 函数</span><br><span class="line"></span><br><span class="line">int high(int key) &#123;</span><br><span class="line"></span><br><span class="line">    string cap = to_string(key);</span><br><span class="line"></span><br><span class="line">    cap[0] = &#x27;0&#x27;;</span><br><span class="line"></span><br><span class="line">    return stoi(cap);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// cook 函数</span><br><span class="line"></span><br><span class="line">int cook(int e, int d[], int period[] = 0) &#123;</span><br><span class="line"></span><br><span class="line">    if (period == 0) &#123;</span><br><span class="line"></span><br><span class="line">        if (decode(L(d[1], d[2], d[3], d[0])) &gt; 100) &#123;</span><br><span class="line"></span><br><span class="line">            if (decode(L(d[1], d[2], d[3], d[0])) == 144) &#123;</span><br><span class="line"></span><br><span class="line">                flag.flag[e - 1] = decode(L(sigmas[8][1], sigmas[8][2], sigmas[8][3], sigmas[8][0])) % 335;</span><br><span class="line"></span><br><span class="line">            &#125; else if (decode(L(d[1], d[2], d[3], d[0])) == 449) &#123;</span><br><span class="line"></span><br><span class="line">                flag.flag[e - 1] = decode(L(sigmas[1][1], sigmas[1][2], sigmas[1][3], sigmas[1][0])) - 30;</span><br><span class="line"></span><br><span class="line">            &#125; else &#123;</span><br><span class="line"></span><br><span class="line">                flag.flag[e - 1] = decode(L(d[1], d[2], d[3], d[0]));</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line"></span><br><span class="line">            flag.flag[e - 1] = high(rando(L(d[1], d[2], d[3], d[0]))) + 48;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125; else &#123;</span><br><span class="line"></span><br><span class="line">        if (rando(L(period[1], period[2], period[3], period[0])) == 610) &#123;</span><br><span class="line"></span><br><span class="line">            flag.flag[e - 1] = rando(L(period[1], period[2], period[3], period[0]));</span><br><span class="line"></span><br><span class="line">        &#125; else if (decode(L(d[1], d[2], d[3], d[0])) &gt; 100) &#123;</span><br><span class="line"></span><br><span class="line">            if (decode(L(period[1], period[2], period[3], period[0])) &gt; 100) &#123;</span><br><span class="line"></span><br><span class="line">                flag.flag[e - 1] = decode(L(d[1], d[2], d[3], d[0])) - decode(L(period[1], period[2], period[3], period[0]));</span><br><span class="line"></span><br><span class="line">                if (flag.flag[e - 1] &lt; 100) &#123;</span><br><span class="line"></span><br><span class="line">                    flag.flag[e - 1] += 100;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125; else &#123;</span><br><span class="line"></span><br><span class="line">                flag.flag[e - 1] = decode(L(d[1], d[2], d[3], d[0])) - rando(L(period[1], period[2], period[3], period[0]));</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//通过cook函数对原本的flag进行操作 每一次操作修改flag的一个值</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">    cook(rando(361) - 300 + 7, sigmas[0]);</span><br><span class="line"></span><br><span class="line">    cook(rando(480) - 300 + 7, sigmas[2]);</span><br><span class="line"></span><br><span class="line">    cook(rando(490) - 400 + 7, sigmas[3], sigmas[4]);</span><br><span class="line"></span><br><span class="line">    cook(rando(539) - 900 + 7, sigmas[9]);</span><br><span class="line"></span><br><span class="line">    cook(rando(557) - 100 + 7, sigmas[1]);</span><br><span class="line"></span><br><span class="line">    cook(rando(819) - 700 + 7, sigmas[6]);</span><br><span class="line"></span><br><span class="line">    cook(rando(843) - 100 + 7, sigmas[8]);</span><br><span class="line"></span><br><span class="line">    cook(rando(906) - 200 + 7, sigmas[7], sigmas[5]);</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; flag.flag &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//bronco&#123;br4inr0t&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Actual-Reversing"><a href="#Actual-Reversing" class="headerlink" title="Actual Reversing"></a>Actual Reversing</h1><p>题目给了一个elf文件和一个txt 打开txt提取一下数字</p>
+<p><img src="/../images/ActualReversing.png" alt="ActualReversing"></p>
+<p><code>-1, -4, 0, -1, 1, 1, 3, 2, 2, 3, 3, 8, 11, 12, 12, 13, 14, 15, 14, 16, 15, 15, 14, 17,  19, 19, 19, 19, 20, 20, 19, 25, 27, 28, 28, 26, 28, 28, 28, 28, 26, 27, 25, 27, 26, 28, 28,  27, 28, 26, 32, 31, 30, 31, 31, 30, 31, 30, 30, 29, 28, 29, 31, 28, 27, 28, 29, 29, 31, 33,  33, 32, 32, 32, 32, 32, 32, 29, 32, 33, 32, 32, 28, 32, 30, 31, 30, 30, 31, 30, 33, 35, 33, 39, 37, 37, 37, 37, 37, 37, 38, 39, 41, 41, 40, 39, 39, 39, 39, 39</code></p>
+<p>随后分析elf文件<br>计算字符的二进制中表示 1 的个数 且等于108个</p>
+<p><img src="/../images/ActualReversing-1.png" alt="ActualReversing-1"></p>
+<p>随后跟进perscribe函数</p>
+<p><img src="/../images/ActualReversing-2.png" alt="ActualReversing-2"></p>
+<p>就是将输入的字符串的每个字符的每一位 与TRUTH字符串进行比对</p>
+<p><img src="/../images/ActualReversing-3.png" alt="ActualReversing-3"></p>
+<p>直接写z3约束求flag即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">from z3 import *  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def solve_flag():  </span><br><span class="line">    x_values = [  </span><br><span class="line">        -1, -4, 0, -1, 1, 1, 3, 2, 2, 3, 3, 8, 11, 12, 12, 13, 14, 15, 14, 16,  </span><br><span class="line">        15, 15, 14, 17, 19, 19, 19, 19, 20, 20, 19, 25, 27, 28, 28, 26, 28, 28,  </span><br><span class="line">        28, 28, 26, 27, 25, 27, 26, 28, 28, 27, 28, 26, 32, 31, 30, 31, 31, 30,  </span><br><span class="line">        31, 30, 30, 29, 28, 29, 31, 28, 27, 28, 29, 29, 31, 33, 33, 32, 32, 32,  </span><br><span class="line">        32, 32, 29, 32, 33, 32, 32, 28, 32, 30, 31, 30, 30, 31, 30, 33, 35, 33,  </span><br><span class="line">        39, 37, 37, 37, 37, 37, 38, 39, 41, 41, 40, 39, 39, 39, 39, 39, 39  </span><br><span class="line">    ]  </span><br><span class="line">  </span><br><span class="line">    target_phrase = &quot;Can birds even understand me?&quot;  </span><br><span class="line">  </span><br><span class="line">    bit_positions = [  </span><br><span class="line">        byte_idx * 8 + bit_offset  </span><br><span class="line">        for byte_idx, char in enumerate(target_phrase)  </span><br><span class="line">        for bit_offset in range(8)  </span><br><span class="line">        if (ord(char) &gt;&gt; bit_offset) &amp; 1  </span><br><span class="line">    ]  </span><br><span class="line">  </span><br><span class="line">    solver = Solver()  </span><br><span class="line">  </span><br><span class="line">    flag_bits = [BitVec(f&#x27;bit_&#123;i&#125;&#x27;, 1) for i in range(512)]  </span><br><span class="line">  </span><br><span class="line">    for pos, x in zip(bit_positions, x_values):  </span><br><span class="line">        target_bit = pos - x  </span><br><span class="line">        solver.add(flag_bits[target_bit] == 1)  </span><br><span class="line">  </span><br><span class="line">    solver.add(sum(flag_bits) == 108)  </span><br><span class="line">  </span><br><span class="line">    if solver.check() == sat:  </span><br><span class="line">        model = solver.model()  </span><br><span class="line">  </span><br><span class="line">        flag_bytes = bytearray()  </span><br><span class="line">        for byte_idx in range(64):  </span><br><span class="line">            byte_value = 0  </span><br><span class="line">            for bit_offset in range(8):  </span><br><span class="line">                bit_index = byte_idx * 8 + bit_offset  </span><br><span class="line">                byte_value |= model[flag_bits[bit_index]].as_long() &lt;&lt; bit_offset  </span><br><span class="line">            flag_bytes.append(byte_value)  </span><br><span class="line">  </span><br><span class="line">        return flag_bytes.decode(&#x27;latin-1&#x27;).strip(&#x27;\x00&#x27;)  </span><br><span class="line">    return &quot;No solution found&quot;  </span><br><span class="line">  </span><br><span class="line">print(solve_flag())</span><br><span class="line">#bronco&#123;r3v3r5ed_3n0ugh?&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/08/2024-%E6%98%A5%E7%A7%8B%E6%9D%AF%E5%86%AC%E5%AD%A3%E8%B5%9B-DAY2-RE-wp/" rel="prev" title="2024 春秋杯冬季赛 DAY2 RE wp">
+                  <i class="fa fa-angle-left"></i> 2024 春秋杯冬季赛 DAY2 RE wp
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Patr1ck</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">69k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:03</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
