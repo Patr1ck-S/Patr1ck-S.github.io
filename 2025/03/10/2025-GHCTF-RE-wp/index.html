@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="referrer" content="no-referrer" />
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"patr1ck-s.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言：RE的最后一题没有写 混淆和花太多 而且出题人的wp写的十分详细 我就不献丑了 ASM?Signin!直接扔给deekseek 得到c语言代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025 GHCTF RE wp">
+<meta property="og:url" content="http://patr1ck-s.github.io/2025/03/10/2025-GHCTF-RE-wp/index.html">
+<meta property="og:site_name" content="Patr1ck&#39;s blog">
+<meta property="og:description" content="前言：RE的最后一题没有写 混淆和花太多 而且出题人的wp写的十分详细 我就不献丑了 ASM?Signin!直接扔给deekseek 得到c语言代码">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/FishingKit.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/FishingKit-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/FishingKit-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/FishingKit-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/FishingKit-4.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/FishingKit-5.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/LockedSecret.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/LockedSecret-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/LockedSecret-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/LockedSecret-6.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/LockedSecret-8.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/LockedSecret-7.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/MioRyoSoyo1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/MioRyoSoyo.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/TimeSpaceRescue-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/TimeSpaceRescue.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/TimeSpaceRescue-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/TimeSpaceRescue-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Room.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Room0.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Room0-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Room0-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Room0-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Room0-4.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Canon.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Canon-4.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/Canon-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/%E8%85%90%E8%9A%80.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/%E8%85%90%E8%9A%80-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/%E8%85%90%E8%9A%80-2.png">
+<meta property="article:published_time" content="2025-03-09T17:41:13.000Z">
+<meta property="article:modified_time" content="2025-03-09T17:56:16.648Z">
+<meta property="article:author" content="Patr1ck">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://patr1ck-s.github.io/images/FishingKit.png">
+
+
+<link rel="canonical" href="http://patr1ck-s.github.io/2025/03/10/2025-GHCTF-RE-wp/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://patr1ck-s.github.io/2025/03/10/2025-GHCTF-RE-wp/","path":"2025/03/10/2025-GHCTF-RE-wp/","title":"2025 GHCTF RE wp"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2025 GHCTF RE wp | Patr1ck's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Patr1ck's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ASM-Signin"><span class="nav-number">1.</span> <span class="nav-text">ASM?Signin!</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FishingKit"><span class="nav-number">2.</span> <span class="nav-text">FishingKit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LockedSecret"><span class="nav-number">3.</span> <span class="nav-text">LockedSecret</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mio%EF%BC%9FRyo%EF%BC%9FSoyo%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">Mio？Ryo？Soyo？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TimeSpaceRescue"><span class="nav-number">5.</span> <span class="nav-text">TimeSpaceRescue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Room-0"><span class="nav-number">6.</span> <span class="nav-text">Room 0</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Canon"><span class="nav-number">7.</span> <span class="nav-text">Canon</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%85%90%E8%9A%80"><span class="nav-number">8.</span> <span class="nav-text">腐蚀</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patr1ck"
+      src="/images/yzbpdx.png">
+  <p class="site-author-name" itemprop="name">Patr1ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://patr1ck-s.github.io/2025/03/10/2025-GHCTF-RE-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yzbpdx.png">
+      <meta itemprop="name" content="Patr1ck">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2025 GHCTF RE wp | Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2025 GHCTF RE wp
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-03-10 01:41:13 / 修改时间：01:56:16" itemprop="dateCreated datePublished" datetime="2025-03-10T01:41:13+08:00">2025-03-10</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>18k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>16 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>前言：RE的最后一题没有写 混淆和花太多 而且出题人的wp写的十分详细 我就不献丑了</strong></p>
+<h1 id="ASM-Signin"><a href="#ASM-Signin" class="headerlink" title="ASM?Signin!"></a>ASM?Signin!</h1><p>直接扔给deekseek 得到c语言代码 </p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// 初始化数据段</span><br><span class="line"></span><br><span class="line">uint8_t DATA1[] = &#123;</span><br><span class="line"></span><br><span class="line">    0x26, 0x27, 0x24, 0x25, 0x2A, 0x2B, 0x28, 0x00,</span><br><span class="line"></span><br><span class="line">    0x2E, 0x2F, 0x2C, 0x2D, 0x32, 0x33, 0x30, 0x00,</span><br><span class="line"></span><br><span class="line">    0x36, 0x37, 0x34, 0x35, 0x3A, 0x3B, 0x38, 0x39,</span><br><span class="line"></span><br><span class="line">    0x3E, 0x3F, 0x3C, 0x3D, 0x3F, 0x27, 0x34, 0x11</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">uint8_t DATA2[] = &#123;</span><br><span class="line"></span><br><span class="line">    0x69, 0x77, 0x77, 0x66, 0x73, 0x72, 0x4F, 0x46,</span><br><span class="line"></span><br><span class="line">    0x03, 0x47, 0x6F, 0x79, 0x07, 0x41, 0x13, 0x47,</span><br><span class="line"></span><br><span class="line">    0x5E, 0x67, 0x5F, 0x09, 0x0F, 0x58, 0x63, 0x7D,</span><br><span class="line"></span><br><span class="line">    0x5F, 0x77, 0x68, 0x35, 0x62, 0x0D, 0x0D, 0x50</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">uint8_t BUFFER1[35] = &#123;0&#125;; // 33字节缓冲区+2字节头信息</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// 数据交换函数</span><br><span class="line"></span><br><span class="line">void swap_blocks(int src, int dest) &#123;</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line"></span><br><span class="line">        uint8_t tmp = DATA1[src + i];</span><br><span class="line"></span><br><span class="line">        DATA1[src + i] = DATA1[dest + i];</span><br><span class="line"></span><br><span class="line">        DATA1[dest + i] = tmp;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// DATA1预处理函数</span><br><span class="line"></span><br><span class="line">void preprocess_data1() &#123;</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 8; i++) &#123;</span><br><span class="line"></span><br><span class="line">        int src = i * 4;</span><br><span class="line"></span><br><span class="line">        int dest = src + 4;</span><br><span class="line"></span><br><span class="line">        if (dest &gt;= 28) &#123;</span><br><span class="line"></span><br><span class="line">            dest -= 28;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        swap_blocks(src, dest);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">// 加密函数</span><br><span class="line"></span><br><span class="line">void encrypt_buffer() &#123;</span><br><span class="line"></span><br><span class="line">    uint8_t *buf = BUFFER1 + 2; // 跳过输入头信息</span><br><span class="line"></span><br><span class="line">    uint8_t *key = DATA1;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 8; i++) &#123;</span><br><span class="line"></span><br><span class="line">        // 构造16位密钥字（小端模式）</span><br><span class="line"></span><br><span class="line">        uint16_t key1 = (key[2] &lt;&lt; 8) | key[1];</span><br><span class="line"></span><br><span class="line">        uint16_t key2 = (key[3] &lt;&lt; 8) | key[2];</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">        // 处理前两个字节</span><br><span class="line"></span><br><span class="line">        uint16_t val = *((uint16_t*)buf);</span><br><span class="line"></span><br><span class="line">        val ^= key1;</span><br><span class="line"></span><br><span class="line">        memcpy(buf, &amp;val, sizeof(val));</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">        // 处理后两个字节</span><br><span class="line"></span><br><span class="line">        val = *((uint16_t*)(buf + 2));</span><br><span class="line"></span><br><span class="line">        val ^= key2;</span><br><span class="line"></span><br><span class="line">        memcpy(buf + 2, &amp;val, sizeof(val));</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">        buf += 4;</span><br><span class="line"></span><br><span class="line">        key += 4;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">    printf(&quot;Welcome to GHCTF!\nInput your flag:&quot;);</span><br><span class="line"></span><br><span class="line">    // 模拟DOS 0AH功能调用</span><br><span class="line"></span><br><span class="line">    fgets((char*)BUFFER1 + 2, sizeof(BUFFER1) - 2, stdin);</span><br><span class="line"></span><br><span class="line">    size_t len = strlen((char*)BUFFER1 + 2);</span><br><span class="line"></span><br><span class="line">    if (len &gt; 0 &amp;&amp; BUFFER1[len + 1] == &#x27;\n&#x27;)</span><br><span class="line"></span><br><span class="line">        BUFFER1[len + 1] = 0;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    preprocess_data1(); // 预处理DATA1</span><br><span class="line"></span><br><span class="line">    encrypt_buffer();   // 加密输入</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    // 验证加密结果</span><br><span class="line"></span><br><span class="line">    if (memcmp(BUFFER1 + 2, DATA2, 32) == 0) &#123;</span><br><span class="line"></span><br><span class="line">        printf(&quot;\nRight!\n&quot;);</span><br><span class="line"></span><br><span class="line">    &#125; else &#123;</span><br><span class="line"></span><br><span class="line">        printf(&quot;\nWrong!\n&quot;);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接对照着写解密即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">key = bytearray([</span><br><span class="line"></span><br><span class="line">    0x26, 0x27, 0x24, 0x25, 0x2A, 0x2B, 0x28, 0x00,</span><br><span class="line"></span><br><span class="line">    0x2E, 0x2F, 0x2C, 0x2D, 0x32, 0x33, 0x30, 0x00,</span><br><span class="line"></span><br><span class="line">    0x36, 0x37, 0x34, 0x35, 0x3A, 0x3B, 0x38, 0x39,</span><br><span class="line"></span><br><span class="line">    0x3E, 0x3F, 0x3C, 0x3D, 0x3F, 0x27, 0x34, 0x11</span><br><span class="line"></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">def swap_blocks(data, src, dest):</span><br><span class="line"></span><br><span class="line">    data[src:src+4], data[dest:dest+4] = data[dest:dest+4], data[src:src+4]</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">for i in range(8):</span><br><span class="line"></span><br><span class="line">    src = i * 4</span><br><span class="line"></span><br><span class="line">    dest = src + 4</span><br><span class="line"></span><br><span class="line">    if dest &gt;= 28:</span><br><span class="line"></span><br><span class="line">        dest -= 28</span><br><span class="line"></span><br><span class="line">    swap_blocks(key, src, dest)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">enc = bytearray([</span><br><span class="line"></span><br><span class="line">    0x69, 0x77, 0x77, 0x66, 0x73, 0x72, 0x4F, 0x46,</span><br><span class="line"></span><br><span class="line">    0x03, 0x47, 0x6F, 0x79, 0x07, 0x41, 0x13, 0x47,</span><br><span class="line"></span><br><span class="line">    0x5E, 0x67, 0x5F, 0x09, 0x0F, 0x58, 0x63, 0x7D,</span><br><span class="line"></span><br><span class="line">    0x5F, 0x77, 0x68, 0x35, 0x62, 0x0D, 0x0D, 0x50</span><br><span class="line"></span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">flag = bytearray()</span><br><span class="line"></span><br><span class="line">for i in range(8):</span><br><span class="line"></span><br><span class="line">    block = enc[i*4:(i+1)*4]</span><br><span class="line"></span><br><span class="line">    k = key[i*4:(i+1)*4]</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    key1 = (k[2] &lt;&lt; 8) | k[1]  </span><br><span class="line"></span><br><span class="line">    key2 = (k[3] &lt;&lt; 8) | k[2]</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    enc1 = block[0] | (block[1] &lt;&lt; 8)</span><br><span class="line"></span><br><span class="line">    dec1 = enc1 ^ key1</span><br><span class="line"></span><br><span class="line">    flag.append(dec1 &amp; 0xFF)</span><br><span class="line"></span><br><span class="line">    flag.append((dec1 &gt;&gt; 8) &amp; 0xFF)</span><br><span class="line"></span><br><span class="line">    # 解密后两个字节</span><br><span class="line"></span><br><span class="line">    enc2 = block[2] | (block[3] &lt;&lt; 8)</span><br><span class="line"></span><br><span class="line">    dec2 = enc2 ^ key2</span><br><span class="line"></span><br><span class="line">    flag.append(dec2 &amp; 0xFF)</span><br><span class="line"></span><br><span class="line">    flag.append((dec2 &gt;&gt; 8) &amp; 0xFF)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">print(flag.decode(&#x27;latin-1&#x27;).strip(&#x27;\x00&#x27;))</span><br><span class="line">#NSSCTF&#123;W0w_y0u&#x27;re_g00d_@t_@5M!!&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="FishingKit"><a href="#FishingKit" class="headerlink" title="FishingKit"></a>FishingKit</h1><p>ida打开附件 逻辑很清晰</p>
+<p><img src="/../images/FishingKit.png" alt="FishingKit"></p>
+<p>z3可以求出key</p>
+<p><img src="/../images/FishingKit-1.png" alt="FishingKit-1"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from z3 import *  </span><br><span class="line">  </span><br><span class="line">a1 = [BitVec(f&#x27;a1[&#123;i&#125;]&#x27;,8) for i in range(10)]  </span><br><span class="line">solver = Solver()  </span><br><span class="line">solver.add(202 * a1[8] + 216 * a1[5] - 4 * a1[4] - 330 * a1[9] - 13 * a1[4] - 268 * a1[6] == 0xFFFFC57A)  </span><br><span class="line">solver.add(325 * a1[8] + 195 * a1[0] + 229 * a1[1] - 121 * a1[6] - 409 * a1[6] - (a1[1] &lt;&lt; 7) == 0x584E)  </span><br><span class="line">solver.add(489 * a1[1] + 480 * a1[6] + 105 * a1[2] + 367 * a1[3] - 135 * a1[4] - 482 * a1[9] == 0xF704)  </span><br><span class="line">solver.add(493 * a1[1] - 80 * a1[4] - 253 * a1[8] - 121 * a1[2] - 177 * a1[0] - 243 * a1[9] == 0xFFFF6510)  </span><br><span class="line">solver.add(275 * a1[4] + 271 * a1[6] + 473 * a1[7] - 72 * a1[5] - 260 * a1[4] - 367 * a1[4] == 0x37AF)  </span><br><span class="line">solver.add(286 * a1[0] + 196 * a1[7] + 483 * a1[2] + 442 * a1[1] - 495 * a1[8] - 351 * a1[4] == 0xA0D3)  </span><br><span class="line">solver.add(212 * a1[2] + 283 * a1[7] - 329 * a1[8] - 429 * a1[9] - 362 * a1[2] - 261 * a1[6] == 0xFFFE9F54)  </span><br><span class="line">solver.add(456 * a1[5] + 244 * a1[7] + 92 * a1[4] + 348 * a1[7] - 225 * a1[1] - 31 * a1[2] == 0x1597F)  </span><br><span class="line">solver.add(238 * a1[9] + 278 * a1[7] + 216 * a1[6] + 237 * a1[0] + 8 * a1[2] - 17 * a1[9] == 0x1477E)  </span><br><span class="line">solver.add(323 * a1[9] + 121 * a1[1] + 370 * a1[7] - (a1[4] &lt;&lt; 6) - 196 * a1[9] - 422 * a1[0] == 0x6763)  </span><br><span class="line">solver.add(166 * a1[9] + 90 * a1[1] + 499 * a1[2] + 301 * a1[8] - 31 * a1[2] - 206 * a1[2] == 0x158B7)  </span><br><span class="line">solver.add(355 * a1[0] + 282 * a1[4] + 44 * a1[9] + 359 * a1[8] - 167 * a1[5] - 62 * a1[3] == 0x12B72)  </span><br><span class="line">solver.add(488 * a1[6] + 379 * a1[9] + 318 * a1[2] - 85 * a1[1] - 357 * a1[2] - 277 * a1[5] == 0x8A46)  </span><br><span class="line">solver.add(40 * a1[0] + 281 * a1[4] + 217 * a1[5] - 241 * a1[1] - 407 * a1[7] - 309 * a1[7] == 0xFFFF7594)  </span><br><span class="line">solver.add(429 * a1[3] + 441 * a1[3] + 115 * a1[1] + 96 * a1[8] + 464 * a1[1] - 133 * a1[7] == 0x26708)  </span><br><span class="line">solutions = []  </span><br><span class="line">while solver.check() == sat:  </span><br><span class="line">    model = solver.model()  </span><br><span class="line">    solution = [model[a1[i]].as_long() for i in range(10)]  </span><br><span class="line">    solutions.append(solution)  </span><br><span class="line">    solver.add(Or([a1[i] != solution[i] for i in range(10)]))  </span><br><span class="line">for sol in solutions:  </span><br><span class="line">    for i in range(10):  </span><br><span class="line">        print(chr(sol[i]),end=&#x27;&#x27;)</span><br><span class="line">#DeluxeBait</span><br></pre></td></tr></table></figure>
+
+<p>随后是一个异或0x14的rc4</p>
+<p><img src="/../images/FishingKit-2.png" alt="FishingKit-2"></p>
+<p>写脚本求出的是fake的flag<br>NSSCTF{Fake!Fake!Fake!}<br>随后看了看左边的函数 发现了一个函数很奇怪</p>
+<p><img src="/../images/FishingKit-3.png" alt="FishingKit-3"></p>
+<p>随后打个断点慢慢调试 发现在main函数调用之前进行了一个跳转</p>
+<p><img src="/../images/FishingKit-4.png" alt="FishingKit-4"></p>
+<p>继续跟进就是之前那个奇怪的函数 交叉引用函数以及变量发现了三个tea的加密</p>
+<p><img src="/../images/FishingKit-5.png" alt="FishingKit-5"></p>
+<p>密文就是之前奇怪的函数里的值<br><code>0xA6975621, 0xDEC4D51A, 0x4D829CA4, 0x56C845D1, 0x5C96B4A7, 0x2087494D</code><br>key就是最开始z3求出来的key 直接对着写脚本即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">void tea_decrypt(uint32_t *v0, uint32_t *v1, uint32_t key[4]) &#123;</span><br><span class="line"></span><br><span class="line">    uint32_t delta = 1719109785;</span><br><span class="line"></span><br><span class="line">    uint32_t sum = delta * 24;</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 24; i++) &#123;</span><br><span class="line"></span><br><span class="line">        *v1 -= ((key[(sum &gt;&gt; 11) &amp; 3] + sum) ^ (*v0 + ((*v0 &gt;&gt; 5) ^ (*v0 * 16))));</span><br><span class="line"></span><br><span class="line">        sum -= delta;</span><br><span class="line"></span><br><span class="line">        *v0 -= ((key[sum &amp; 3] + sum) ^ (*v1 + ((*v1 &gt;&gt; 5) ^ (*v1 * 16))));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">    uint32_t enc[6] = &#123;0xA6975621, 0xDEC4D51A, 0x4D829CA4, 0x56C845D1, 0x5C96B4A7, 0x2087494D&#125;;</span><br><span class="line"></span><br><span class="line">    uint32_t key[4] = &#123;0x756C6544, 0x61426578, 0x7469, 0&#125;;</span><br><span class="line"></span><br><span class="line">    uint32_t flag[6];</span><br><span class="line"></span><br><span class="line">    tea_decrypt(&amp;enc[0], &amp;enc[1], key);</span><br><span class="line"></span><br><span class="line">    tea_decrypt(&amp;enc[2], &amp;enc[3], key);</span><br><span class="line"></span><br><span class="line">    tea_decrypt(&amp;enc[4], &amp;enc[5], key);</span><br><span class="line"></span><br><span class="line">    memcpy(flag, enc, sizeof(enc));</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 6; i++) &#123;</span><br><span class="line"></span><br><span class="line">        uint8_t *bytes = (uint8_t *)&amp;flag[i];</span><br><span class="line"></span><br><span class="line">        for (int j = 0; j &lt; 4; j++) &#123;</span><br><span class="line"></span><br><span class="line">            printf(&quot;%c&quot;, bytes[j]);  // 按小端序输出字符</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//NSSCTF&#123;Wh@t_@_b1g_F1sh&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="LockedSecret"><a href="#LockedSecret" class="headerlink" title="LockedSecret"></a>LockedSecret</h1><p>首先查壳 修改一下特征值 即可upx -d脱掉</p>
+<p><img src="/../images/LockedSecret.png" alt="LockedSecret"></p>
+<p>ida打开 逻辑很清晰 flag长度32</p>
+<p><img src="/../images/LockedSecret-1.png" alt="LockedSecret-1"></p>
+<p>跟进encry函数 进行了很多自定义的加密 带有混淆 很难看</p>
+<p><img src="/../images/LockedSecret-2.png" alt="LockedSecret-2"></p>
+<p>随后一点一点分析下面的逻辑 类似于tea加密 扔给deepseek 简化一下</p>
+<p><img src="/../images/LockedSecret-6.png" alt="LockedSecret-6"></p>
+<p>把这些看成一个整体 分为flag1和2</p>
+<p><img src="/../images/LockedSecret-8.png" alt="LockedSecret-8"></p>
+<p>随后对照着加密 写出解密脚本即可 需要注意这个地方多处理一下即可</p>
+<p><img src="/../images/LockedSecret-7.png" alt="LockedSecret-7"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">uint32_t key[4] = &#123;0x423DF72D, 0x05F59A01, 0x633FCF1D, 0x77D19122&#125;;</span><br><span class="line"></span><br><span class="line">uint32_t enc[8] = &#123;0x031e45dc, 0x2776e989, 0x01234847, 0x64ced270,</span><br><span class="line"></span><br><span class="line">                   0x33467fda, 0xa34903b1, 0x2cd10027, 0x75bdb337&#125;;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">uint32_t tea1(uint32_t m, int32_t sum) &#123;</span><br><span class="line"></span><br><span class="line">    m &amp;= 0xffffffff;</span><br><span class="line"></span><br><span class="line">    return ((key[1] + (m &gt;&gt; 5)) &amp; 0xffffffff) ^ ((m + sum) &amp; 0xffffffff) ^ ((key[0] + 16 * m) &amp; 0xffffffff);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">uint32_t tea2(uint32_t m, int32_t sum) &#123;</span><br><span class="line"></span><br><span class="line">    m &amp;= 0xffffffff;</span><br><span class="line"></span><br><span class="line">    return ((key[3] + (m &gt;&gt; 5)) &amp; 0xffffffff) ^ ((m + sum) &amp; 0xffffffff) ^ ((key[2] + 16 * m) &amp; 0xffffffff);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line"></span><br><span class="line">    uint32_t flag[8];</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line"></span><br><span class="line">        uint32_t flag_1 = enc[2 * i] ^ 0xf;</span><br><span class="line"></span><br><span class="line">        uint32_t flag_2 = enc[2 * i + 1] ^ 0xf;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">        uint32_t v2 = (flag_2 - tea2(flag_1, -249839624)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v6 = (flag_1 - tea1(v2, -249839624)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v7 = (v2 - tea2(v6, -1829222407)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v8 = (v6 - tea1(v7, -1829222407)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v9 = (v7 - tea2(v8, 886362106)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v10 = (v8 - tea1(v9, 886362106)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v11 = (v9 - tea2(v10, -693020677)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v1 = (v10 - tea1(v11, -693020677)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v12 = (v11 - tea2(v1, 2022563836)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v100 = (v1 - tea1(v12, 2022563836)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v13 = (v12 - tea2(v100, 443181053)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v14 = (v100 - tea1(v13, 443181053)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v15 = (v13 - tea2(v14, -1136201730)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v16 = (v14 - tea1(v15, -1136201730)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        uint32_t v17 = (v15 - tea2(v16, 1579382783)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        flag[2 * i] = (v16 - tea1(v17, 1579382783)) &amp; 0xffffffff;</span><br><span class="line"></span><br><span class="line">        flag[2 * i + 1] = v17;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    uint8_t byte_data[32];</span><br><span class="line"></span><br><span class="line">    memcpy(byte_data, flag, sizeof(flag));</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 32; i++) &#123;</span><br><span class="line"></span><br><span class="line">        if (byte_data[i] &gt;= 32 &amp;&amp; byte_data[i] &lt;= 126) &#123;</span><br><span class="line"></span><br><span class="line">            printf(&quot;%c&quot;, byte_data[i]);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//NSSCTF&#123;!!!Y0u_g3t_th3_s3cr3t!!!&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Mio？Ryo？Soyo？"><a href="#Mio？Ryo？Soyo？" class="headerlink" title="Mio？Ryo？Soyo？"></a>Mio？Ryo？Soyo？</h1><p>python的exe 使用pyinstxtractor解包 注意版本是3.8<br>随后找个在线网站反编译 看反编译出来的代码 变量名很长 先修改一下</p>
+<p><img src="/../images/MioRyoSoyo1.png" alt="MioRyoSoyo1"></p>
+<p>主要就是标准的base85 修改了码表的base45 还有凯撒<br>随后看密文以及加密过程</p>
+<p><img src="/../images/MioRyoSoyo.png" alt="MioRyoSoyo"></p>
+<p>加密是base45-凯撒移位7-base85-凯撒移位9<br>直接写逆向脚本即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">def caesar(enc, key):</span><br><span class="line"></span><br><span class="line">    bbb = []</span><br><span class="line"></span><br><span class="line">    for a in enc:</span><br><span class="line"></span><br><span class="line">        if &quot;a&quot; &lt;= a &lt;= &quot;z&quot;:</span><br><span class="line"></span><br><span class="line">            bbb.append(chr(ord(&quot;a&quot;)+(ord(a) - ord(&quot;a&quot;) - key) % 26))</span><br><span class="line"></span><br><span class="line">        elif &quot;0&quot; &lt;= a &lt;= &quot;9&quot;:</span><br><span class="line"></span><br><span class="line">            bbb.append(chr(ord(&quot;0&quot;) + (ord(a) - ord(&quot;0&quot;) + key) % 10))</span><br><span class="line"></span><br><span class="line">        else:</span><br><span class="line"></span><br><span class="line">            bbb.append(a)</span><br><span class="line"></span><br><span class="line">    return &quot;&quot;.join(bbb)</span><br><span class="line"></span><br><span class="line">def base45_decode(encoded_str, custom_alphabet):</span><br><span class="line"></span><br><span class="line">    if len(custom_alphabet) != 45:</span><br><span class="line"></span><br><span class="line">        raise ValueError(&quot;Base45 码表长度必须为 45&quot;)</span><br><span class="line"></span><br><span class="line">    char_to_index = &#123;char: idx for idx, char in enumerate(custom_alphabet)&#125;</span><br><span class="line"></span><br><span class="line">    n = len(encoded_str)</span><br><span class="line"></span><br><span class="line">    decoded_bytes = []</span><br><span class="line"></span><br><span class="line">    i = 0</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    while i &lt; n:</span><br><span class="line"></span><br><span class="line">        if i + 3 &lt;= n:</span><br><span class="line"></span><br><span class="line">            c0, c1, c2 = encoded_str[i], encoded_str[i + 1], encoded_str[i + 2]</span><br><span class="line"></span><br><span class="line">            value = (char_to_index[c0] + char_to_index[c1] * 45 + char_to_index[c2] * 45 * 45)</span><br><span class="line"></span><br><span class="line">            decoded_bytes.extend(value.to_bytes(2, &quot;big&quot;))</span><br><span class="line"></span><br><span class="line">            i += 3</span><br><span class="line"></span><br><span class="line">        elif i + 2 &lt;= n:</span><br><span class="line"></span><br><span class="line">            c0, c1 = encoded_str[i], encoded_str[i + 1]</span><br><span class="line"></span><br><span class="line">            value = char_to_index[c0] + char_to_index[c1] * 45</span><br><span class="line"></span><br><span class="line">            if value &gt; 0xFF:</span><br><span class="line"></span><br><span class="line">                raise ValueError(&quot;无效的 Base45 编码：剩余字符解码后超出 1 字节范围&quot;)</span><br><span class="line"></span><br><span class="line">            decoded_bytes.extend(value.to_bytes(1, &quot;big&quot;))</span><br><span class="line"></span><br><span class="line">            i += 2</span><br><span class="line"></span><br><span class="line">        else:</span><br><span class="line"></span><br><span class="line">            raise ValueError(&quot;无效的 Base45 编码：字符串长度不符合要求&quot;)</span><br><span class="line"></span><br><span class="line">    return bytes(decoded_bytes)</span><br><span class="line"></span><br><span class="line">base45_table = &quot;0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\&quot;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">import base64</span><br><span class="line"></span><br><span class="line">enc = &#x27;9v!rD8us&quot;44_N(1;_U?z6!Mn16&quot;mjz&lt;\l[=3*&gt;#&amp;4C&gt;zt0L2C3;)z--3Z&#x27;</span><br><span class="line"></span><br><span class="line">enc1 = base64.a85decode(caesar(enc,9)).decode()</span><br><span class="line"></span><br><span class="line">flag = base45_decode(caesar(enc1, 7),base45_table).decode()</span><br><span class="line"></span><br><span class="line">print(flag)</span><br><span class="line">#NSSCTF&#123;Th3y&#x27;r3_a11_p1aY_Ba5e!&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="TimeSpaceRescue"><a href="#TimeSpaceRescue" class="headerlink" title="TimeSpaceRescue"></a>TimeSpaceRescue</h1><p>根据题目描述 猜测需要时间戳爆破 范围是整个2024年<br>ida打开附件 有反调试 nop掉即可</p>
+<p><img src="/../images/TimeSpaceRescue-1.png" alt="TimeSpaceRescue-1"></p>
+<p>进入主函数 逻辑很清晰</p>
+<p><img src="/../images/TimeSpaceRescue.png" alt="TimeSpaceRescue"></p>
+<p>输入flag 根据当前时间的年月日 md5之后生成key 再根据key解密魔改的AES<br>跟进key_encry函数 有花 nop掉</p>
+<p><img src="/../images/TimeSpaceRescue-2.png" alt="TimeSpaceRescue-2"></p>
+<p>随后看sub_211210函数 找到魔改点</p>
+<p><img src="/../images/TimeSpaceRescue-3.png" alt="TimeSpaceRescue-3"></p>
+<p>10A0就是xor 0x5然后交换位置 1030就是xor 0xf然后交换位置 直接根据这些约束 写脚本爆破即可 爆破思路是 先爆破前16位 如果有NSSCTF字样则是正确的key 再根据这个key解密剩下的密文</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">import hashlib  </span><br><span class="line">from Crypto.Cipher import AES  </span><br><span class="line">  </span><br><span class="line">def sub_2110A0(data):  </span><br><span class="line">    data = bytearray(data)  </span><br><span class="line">    for i in range(0, 16, 2):  </span><br><span class="line">        if i + 1 &gt;= len(data):  </span><br><span class="line">            break  </span><br><span class="line">        a = data[i] ^ 0x05  </span><br><span class="line">        b = data[i + 1] ^ 0x05  </span><br><span class="line">        data[i], data[i + 1] = b, a  </span><br><span class="line">    return bytes(data)  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def sub_211030(data):  </span><br><span class="line">    data = bytearray(data)  </span><br><span class="line">    n = len(data)  </span><br><span class="line">    for i in range(n // 2):  </span><br><span class="line">        j = n - 1 - i  </span><br><span class="line">        a = data[i] ^ 0x0F  </span><br><span class="line">        b = data[j] ^ 0x0F  </span><br><span class="line">        data[i], data[j] = b, a  </span><br><span class="line">    return bytes(data)  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def generate_key(input_data):  </span><br><span class="line">    md5 = hashlib.md5(input_data).digest()  </span><br><span class="line">    key = bytes([(b ^ 0x14) ^ 0x11 for b in md5])  </span><br><span class="line">    return key  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def aes_decrypt(key, ciphertext):  </span><br><span class="line">    cipher = AES.new(key, AES.MODE_ECB)  </span><br><span class="line">    try:  </span><br><span class="line">        plaintext = cipher.decrypt(ciphertext)  </span><br><span class="line">    except ValueError as e:  </span><br><span class="line">        print(f&quot;Decryption error: &#123;e&#125;&quot;)  </span><br><span class="line">        return b&#x27;&#x27;  </span><br><span class="line">    return plaintext  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">enc1 = bytes([0xcd, 0x16, 0xdb, 0xb5, 0xd1, 0x02, 0xa4, 0x82, 0x8e, 0x59, 0x73, 0x9e, 0x96, 0x26, 0x56, 0xf2])  </span><br><span class="line">days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  </span><br><span class="line">for month in range(12):  </span><br><span class="line">    for day in range(1, days_in_month[month] + 1):  </span><br><span class="line">        input_data = bytearray(12)  </span><br><span class="line">        input_data[0:4] = day.to_bytes(4, &#x27;little&#x27;)  </span><br><span class="line">        input_data[4:8] = month.to_bytes(4, &#x27;little&#x27;)  </span><br><span class="line">        input_data[8:12] = (124).to_bytes(4, &#x27;little&#x27;)  </span><br><span class="line">        key = generate_key(bytes(input_data))  </span><br><span class="line">        encrypted_key = sub_2110A0(key)  </span><br><span class="line">        processed_cipher = sub_2110A0(enc1)  </span><br><span class="line">        decrypted = aes_decrypt(encrypted_key, processed_cipher)  </span><br><span class="line">        if not decrypted:  </span><br><span class="line">            continue  </span><br><span class="line">        flag1 = sub_211030(decrypted)  </span><br><span class="line">        if b&#x27;NSSCTF&#x27; in flag1:  </span><br><span class="line">            print(day, month + 1)  </span><br><span class="line">            print(encrypted_key)  </span><br><span class="line">            print(flag1.decode(&#x27;latin-1&#x27;))  # NSSCTF&#123;W0w_Y0u&#x27;r  </span><br><span class="line">  </span><br><span class="line">enc = bytes([  </span><br><span class="line">    0x16, 0x8e, 0x46, 0xf2, 0x55, 0x7b, 0x92, 0x31,  </span><br><span class="line">    0x30, 0xdc, 0xaa, 0x8a, 0xf3, 0x1c, 0xa0, 0xaa  </span><br><span class="line">])  </span><br><span class="line">key = b&#x27;\n\xe4\xfbFF+YTF+k\x87t&amp;\x91\x07&#x27;  </span><br><span class="line">processed_cipher = sub_2110A0(enc)  </span><br><span class="line">decrypted = aes_decrypt(key, processed_cipher)  </span><br><span class="line">flag2 = sub_211030(decrypted)  </span><br><span class="line">print(flag2.decode(&#x27;latin-1&#x27;,(errors=&#x27;replace&#x27;))</span><br><span class="line">#NSSCTF&#123;W0w_Y0u&#x27;re_@n_AE5_M@5t3r&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Room-0"><a href="#Room-0" class="headerlink" title="Room 0"></a>Room 0</h1><p>ida打开附件 有花 先去掉</p>
+<p><img src="/../images/Room.png" alt="Room"></p>
+<p><img src="/../images/Room0.png" alt="Room0"></p>
+<p><img src="/../images/Room0-1.png" alt="Room0-1"></p>
+<p>retn jzjnz花 直接nop掉 随后看主函数 逻辑很清晰</p>
+<p><img src="/../images/Room0-2.png" alt="Room0-2"></p>
+<p>首先计算key key需要爆破 运算后的smc是一个函数 开头就是 push ebp mov ebp esp<br>所以前三位固定 爆破第四位 后来根据hint 触发除数为零的异常去爆破</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    int v2;          // [esp+0h] [ebp-1Ch]</span><br><span class="line"></span><br><span class="line">    int i;           // [esp+4h] [ebp-18h]</span><br><span class="line"></span><br><span class="line">    int v4;          // [esp+8h] [ebp-14h]</span><br><span class="line"></span><br><span class="line">    int v5;          // [esp+Ch] [ebp-10h]</span><br><span class="line"></span><br><span class="line">    int v6;          // [esp+10h] [ebp-Ch]</span><br><span class="line"></span><br><span class="line">    int v7;          // [esp+10h] [ebp-Ch]</span><br><span class="line"></span><br><span class="line">    unsigned int v8; // [esp+14h] [ebp-8h]</span><br><span class="line"></span><br><span class="line">    int v9;</span><br><span class="line"></span><br><span class="line">    int key;</span><br><span class="line"></span><br><span class="line">    v9 = 0x755ff000;</span><br><span class="line"></span><br><span class="line">    for (i = 0; i &lt; 0xff, v9 &lt; 0x755ff0ff; i++, v9++)</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        v6 = 0;</span><br><span class="line"></span><br><span class="line">        v8 = 0x75;</span><br><span class="line"></span><br><span class="line">        v5 = 0x5f;</span><br><span class="line"></span><br><span class="line">        v4 = 0xf0;</span><br><span class="line"></span><br><span class="line">        key = v9;</span><br><span class="line"></span><br><span class="line">        for (int j = 0; j &lt; 32; ++j)</span><br><span class="line"></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">            v5 = (key + v5) ^ (8 * v4);</span><br><span class="line"></span><br><span class="line">            v4 = (key + v8) ^ (8 * v5);</span><br><span class="line"></span><br><span class="line">            v8 = (key + v4) ^ (8 * v5);</span><br><span class="line"></span><br><span class="line">            key -= v4 + v5 + v8;</span><br><span class="line"></span><br><span class="line">            if ((key - 1415881080) == 0)</span><br><span class="line"></span><br><span class="line">            &#123;</span><br><span class="line"></span><br><span class="line">                printf(&quot;%x&quot;, v9);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;//755ff0d3</span><br></pre></td></tr></table></figure>
+
+<p>得到key之后 打个断点 触发异常跳到smc段 也是retn jzjnz花 去掉即可</p>
+<p><img src="/../images/Room0-3.png" alt="Room0-3"></p>
+<p>得到这么一个函数</p>
+<p><img src="/../images/Room0-4.png" alt="Room0-4"></p>
+<p>像是个魔改的rc4 最后的加密就是个异或 所以提取一下输入的密文加密后的值 得到密钥流异或密文即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">print(&quot;A&quot; * 32)  </span><br><span class="line">get = [0x2D, 0xD6, 0xB2, 0x58, 0xCB, 0xEA, 0x58, 0x56, 0x0A, 0xD7,  </span><br><span class="line">       0x1F, 0x95, 0x77, 0x95, 0x15, 0xFD, 0x52, 0xBF, 0x4C, 0x4A,  </span><br><span class="line">       0x80, 0xA5, 0x61, 0xEB, 0x3A, 0xA9, 0x44, 0xE8, 0x01, 0xAC,  </span><br><span class="line">       0xBC, 0x95]  </span><br><span class="line">enc = [0x22, 0xC4, 0xA0, 0x5A, 0xDE, 0xED, 0x62, 0x5E, 0x25, 0xE2,  </span><br><span class="line">       0x6D, 0xA6, 0x05, 0xA7, 0x20, 0x8D, 0x7D, 0x99, 0x52, 0x3E,  </span><br><span class="line">       0x8C, 0xA7, 0x7F, 0xFA, 0x09, 0xD8, 0x62, 0xDB, 0x00, 0x80,  </span><br><span class="line">       0xC2, 0xA9]  </span><br><span class="line">keystream = [(ord(&quot;A&quot;) ^ i) &amp; 0xff for i in get]  </span><br><span class="line">for i in range(len(enc)):  </span><br><span class="line">    enc[i] ^= keystream[i]  </span><br><span class="line">    enc[i] &amp;= 0xff  </span><br><span class="line">print(&quot;&quot;.join(map(chr, enc)))</span><br><span class="line">#NSSCTF&#123;Int3r3st1ng_5MC_Pr0gr@m?&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Canon"><a href="#Canon" class="headerlink" title="Canon"></a>Canon</h1><p>ida打开附件 逻辑很清晰 直接起调试dump下来加密的各个case 没用到case2 7 所以不用分析 </p>
+<p><img src="/../images/Canon.png" alt="Canon"></p>
+<p>注意加密的base64是换表的</p>
+<p><img src="/../images/Canon-4.png" alt="Canon-4"></p>
+<p>起调试dump下来</p>
+<p><img src="/../images/Canon-2.png" alt="Canon-2"></p>
+<p><code>stuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqr</code><br>逆回去写解密即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">import base64  </span><br><span class="line">import math  </span><br><span class="line"></span><br><span class="line">def rc4_decrypt(data, key):  </span><br><span class="line">    key = key.encode()  </span><br><span class="line">    S = list(range(256))  </span><br><span class="line">    j = 0  </span><br><span class="line">    out = []  </span><br><span class="line">  </span><br><span class="line">    for i in range(256):  </span><br><span class="line">        j = (j + S[i] + key[i % len(key)]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">  </span><br><span class="line">    i = j = 0  </span><br><span class="line">    for char in data:  </span><br><span class="line">        i = (i + 1) % 256  </span><br><span class="line">        j = (j + S[i]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">        out.append(((char - 0x39) ^ S[(S[i] + S[j]) % 256]) % 256)  </span><br><span class="line">    return bytes(out)  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def decrypt(a1, a2, a3):  </span><br><span class="line">    v9 = len(a1)  </span><br><span class="line">    v21 = len(a2)  </span><br><span class="line">    if a3 == 1:  </span><br><span class="line">        output = &#x27;&#x27;  </span><br><span class="line">        for i in range(v9):  </span><br><span class="line">            v22 = ord(a2[i % v21])  </span><br><span class="line">            if &#x27;A&#x27; &lt;= a1[i] &lt;= &#x27;Z&#x27;:  </span><br><span class="line">                offset = (ord(a1[i]) - ord(&#x27;A&#x27;) - v22) % 26  </span><br><span class="line">                output += chr(offset + ord(&#x27;A&#x27;))  </span><br><span class="line">            elif &#x27;a&#x27; &lt;= a1[i] &lt;= &#x27;z&#x27;:  </span><br><span class="line">                offset = (ord(a1[i]) - ord(&#x27;a&#x27;) - v22) % 26  </span><br><span class="line">                output += chr(offset + ord(&#x27;a&#x27;))  </span><br><span class="line">            elif &#x27;0&#x27; &lt;= a1[i] &lt;= &#x27;9&#x27;:  </span><br><span class="line">                offset = (ord(a1[i]) - ord(&#x27;0&#x27;) - v22) % 10  </span><br><span class="line">                output += chr(offset + ord(&#x27;0&#x27;))  </span><br><span class="line">            else:  </span><br><span class="line">                output += a1[i]  </span><br><span class="line">        return output  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">    elif a3 == 3:  </span><br><span class="line">        Ek = ord(a2[0]) % 10 + 2  </span><br><span class="line">        cipher_len = v9  </span><br><span class="line">        Dk = cipher_len // Ek  </span><br><span class="line">        remainder = cipher_len % Ek  </span><br><span class="line">        if remainder == 0:  </span><br><span class="line">            steps = [Dk] * Ek  </span><br><span class="line">        else:  </span><br><span class="line">            big_step = math.ceil(cipher_len / Ek)  </span><br><span class="line">            small_step = cipher_len // Ek  </span><br><span class="line">            steps = [big_step] * remainder + [small_step] * (Ek - remainder)  </span><br><span class="line">        output = []  </span><br><span class="line">        max_columns = math.ceil(cipher_len / Ek)  </span><br><span class="line">        for n_column in range(max_columns):  </span><br><span class="line">            count = 0  </span><br><span class="line">            for step in steps:  </span><br><span class="line">                pos = n_column + count  </span><br><span class="line">                if pos &gt;= cipher_len:  </span><br><span class="line">                    break  </span><br><span class="line">                output.append(a1[pos])  </span><br><span class="line">                count += step  </span><br><span class="line">        return &#x27;&#x27;.join(output)  </span><br><span class="line">  </span><br><span class="line">    elif a3 == 4:  </span><br><span class="line">        v25 = ord(a2[0]) % 10 + 2  </span><br><span class="line">        output = a1[v25:] + a1[:v25]  </span><br><span class="line">        return output  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">    elif a3 == 5:  </span><br><span class="line">        tableBase64 = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;  </span><br><span class="line">        tableNew = &quot;stuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqr&quot;  </span><br><span class="line">        decoded = base64.b64decode(a1.translate(str.maketrans(tableNew, tableBase64)))  </span><br><span class="line">        output = &#x27;&#x27;  </span><br><span class="line">        for i, char in enumerate(decoded):  </span><br><span class="line">            output += chr(char ^ ord(a2[i % v21]) + 57)  </span><br><span class="line">        return output  </span><br><span class="line">  </span><br><span class="line">    elif a3 == 6:  </span><br><span class="line">        tableBase64 = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;  </span><br><span class="line">        tableNew = &quot;stuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqr&quot;  </span><br><span class="line">        decoded = base64.b64decode(a1.translate(str.maketrans(tableNew, tableBase64)))  </span><br><span class="line">        output = rc4_decrypt(decoded, a2)  </span><br><span class="line">        return output.decode()  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">enc1 = &quot;WgvDmssEvcY326bHo3nNro3vXvvfmgrz&quot;  </span><br><span class="line">enc2 = &quot;gX+Ri9PG=bt5=00B6hscPQOL&quot;  </span><br><span class="line">enc3 = &quot;T6bHgUPL2gXUd=xT=FNHtPzV&quot;  </span><br><span class="line">  </span><br><span class="line">enc3 = decrypt(enc3, enc1, 1)  </span><br><span class="line">enc2 = decrypt(enc2, enc3, 4)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 5)  </span><br><span class="line">  </span><br><span class="line">enc3 = decrypt(enc3, enc1, 4)  </span><br><span class="line">enc2 = decrypt(enc2, enc3, 1)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 4)  </span><br><span class="line">  </span><br><span class="line">enc3 = decrypt(enc3, enc1, 3)  </span><br><span class="line">enc2 = decrypt(enc2, enc3, 4)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 1)  </span><br><span class="line">  </span><br><span class="line">enc3 = decrypt(enc3, enc1, 6)  </span><br><span class="line">enc2 = decrypt(enc2, enc3, 3)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 4)  </span><br><span class="line">  </span><br><span class="line">enc3 = decrypt(enc3, enc1, 5)  </span><br><span class="line">enc2 = decrypt(enc2, enc3, 6)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 3)  </span><br><span class="line">  </span><br><span class="line">enc3 = decrypt(enc3, enc1, 1)  </span><br><span class="line">enc2 = decrypt(enc2, enc3, 5)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 6)  </span><br><span class="line">  </span><br><span class="line">enc2 = decrypt(enc2, enc3, 1)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 5)  </span><br><span class="line">enc1 = decrypt(enc1, enc2, 1)  </span><br><span class="line">#print(enc1)  </span><br><span class="line">#print(enc2)  </span><br><span class="line">#print(enc3)  </span><br><span class="line">print(enc1 + enc2 + enc3)</span><br><span class="line">#NSSCTF&#123;P4ch3Lbel&#x27;s_C@n0n_1n_D_mAjOr&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="腐蚀"><a href="#腐蚀" class="headerlink" title="腐蚀"></a>腐蚀</h1><p>ida打开附件 查看字符串 发现input.png 所以可以知道 是对enc进行了一些操作 得到png文件 根据字符串定位到函数</p>
+<p><img src="/../images/%E8%85%90%E8%9A%80.png" alt="腐蚀"></p>
+<p>跟进sub_7FF7354652E0函数 发现256 最后还有xor 猜测是魔改的rc4 多xor了个0x1f</p>
+<p><img src="/../images/%E8%85%90%E8%9A%80-1.png" alt="腐蚀-1"></p>
+<p>起个调试取出key<br><code>0x60, 0x82, 0xAE, 0x42, 0x4E, 0x44, 0x49, 0x45, 0x1A, 0x0A, 0x0D, 0x0A, 0x4E, 0x47, 0x89, 0x50</code><br>随后在内存中看见 对输入进行了倒叙操作 所以加密流程就是 rc4 倒叙 写逆向脚本即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">def rc4_decrypt(data, key):  </span><br><span class="line">    S = list(range(256))  </span><br><span class="line">    j = 0  </span><br><span class="line">    key_len = len(key)  </span><br><span class="line">  </span><br><span class="line">    for i in range(256):  </span><br><span class="line">        j = (j + S[i] + key[i % key_len]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">  </span><br><span class="line">    i = j = 0  </span><br><span class="line">    output = []  </span><br><span class="line">  </span><br><span class="line">    for k in range(len(data)):  </span><br><span class="line">        i = (i + 1) % 256  </span><br><span class="line">        j = (j + S[i]) % 256  </span><br><span class="line">        S[i], S[j] = S[j], S[i]  </span><br><span class="line">        output.append((data[k] ^ S[(S[i] + S[j]) % 256]) ^ 0x1F)  </span><br><span class="line">  </span><br><span class="line">    return bytes(output)  </span><br><span class="line">  </span><br><span class="line">def decrypt_file(filename, key):  </span><br><span class="line">    with open(filename, &quot;rb&quot;) as f:  </span><br><span class="line">        enc_data = f.read()  </span><br><span class="line">    enc_data = enc_data[::-1]  </span><br><span class="line">    decrypted_data = rc4_decrypt(enc_data, key)  </span><br><span class="line">    return decrypted_data  </span><br><span class="line">  </span><br><span class="line">filename = &quot;./enc&quot;  </span><br><span class="line">key = bytes([0x60, 0x82, 0xAE, 0x42, 0x4E, 0x44, 0x49, 0x45, 0x1A, 0x0A, 0x0D, 0x0A, 0x4E, 0x47, 0x89, 0x50])  </span><br><span class="line">  </span><br><span class="line">decrypted_data = decrypt_file(filename, key)  </span><br><span class="line">  </span><br><span class="line">with open(&quot;./1.png&quot;, &quot;wb&quot;) as f:  </span><br><span class="line">    f.write(decrypted_data)</span><br></pre></td></tr></table></figure>
+
+<p>打开图片得到flag</p>
+<p><img src="/../images/%E8%85%90%E8%9A%80-2.png" alt="腐蚀-2"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/17/2025-BroncoCTF-RE-wp/" rel="prev" title="2025 BroncoCTF RE wp">
+                  <i class="fa fa-angle-left"></i> 2025 BroncoCTF RE wp
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Patr1ck</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">86k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:19</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
