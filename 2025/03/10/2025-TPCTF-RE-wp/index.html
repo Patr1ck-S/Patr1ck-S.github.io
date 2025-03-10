@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="referrer" content="no-referrer" />
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"patr1ck-s.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="linuxpdf打开附件 下面有个github的链接 打开之后是一个网页的linux 观察一下原本的和附件的区别 发现这里多加载了很多东西">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2025 TPCTF RE wp">
+<meta property="og:url" content="http://patr1ck-s.github.io/2025/03/10/2025-TPCTF-RE-wp/index.html">
+<meta property="og:site_name" content="Patr1ck&#39;s blog">
+<meta property="og:description" content="linuxpdf打开附件 下面有个github的链接 打开之后是一个网页的linux 观察一下原本的和附件的区别 发现这里多加载了很多东西">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/linuxpdf.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/linuxpdf-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/linuxpdf-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/linuxpdf-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/linuxpdf-4.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/portable.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/portable-1.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/portable-2.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/portable-3.png">
+<meta property="og:image" content="http://patr1ck-s.github.io/images/ef8695a42a6fbbf1b93202dc9f7bb705.png">
+<meta property="article:published_time" content="2025-03-09T18:05:30.000Z">
+<meta property="article:modified_time" content="2025-03-10T14:53:40.387Z">
+<meta property="article:author" content="Patr1ck">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://patr1ck-s.github.io/images/linuxpdf.png">
+
+
+<link rel="canonical" href="http://patr1ck-s.github.io/2025/03/10/2025-TPCTF-RE-wp/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://patr1ck-s.github.io/2025/03/10/2025-TPCTF-RE-wp/","path":"2025/03/10/2025-TPCTF-RE-wp/","title":"2025 TPCTF RE wp"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>2025 TPCTF RE wp | Patr1ck's blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Patr1ck's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linuxpdf"><span class="nav-number">1.</span> <span class="nav-text">linuxpdf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#portable"><span class="nav-number">2.</span> <span class="nav-text">portable</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Patr1ck"
+      src="/images/yzbpdx.png">
+  <p class="site-author-name" itemprop="name">Patr1ck</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://patr1ck-s.github.io/2025/03/10/2025-TPCTF-RE-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yzbpdx.png">
+      <meta itemprop="name" content="Patr1ck">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="2025 TPCTF RE wp | Patr1ck's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2025 TPCTF RE wp
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-03-10 02:05:30 / 修改时间：22:53:40" itemprop="dateCreated datePublished" datetime="2025-03-10T02:05:30+08:00">2025-03-10</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="linuxpdf"><a href="#linuxpdf" class="headerlink" title="linuxpdf"></a>linuxpdf</h1><p>打开附件 下面有个github的链接 打开之后是一个网页的linux 观察一下原本的和附件的区别 发现这里多加载了很多东西</p>
+<span id="more"></span>
+
+<p><img src="/../images/linuxpdf.png" alt="linuxpdf"></p>
+<p>应该是出题人加入的 多运行几次 可以发现最后的那个a9加载完毕之后 Flag出现 所以可以猜测那个a9就是主要的文件<br>扔010里 发现了很多base64加密的字符串 写个脚本解压保存文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">import base64  </span><br><span class="line">import zlib  </span><br><span class="line">import os  </span><br><span class="line">from pathlib import Path  </span><br><span class="line">from typing import Dict, Union  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def decode_and_inflate(encoded_data: str) -&gt; bytes:  </span><br><span class="line">    decoded = base64.b64decode(encoded_data)  </span><br><span class="line">    return zlib.decompress(decoded, wbits=15)  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def save_content(  </span><br><span class="line">        output_path: Union[str, Path],  </span><br><span class="line">        binary_data: bytes,  </span><br><span class="line">        ensure_dir: bool = True  </span><br><span class="line">) -&gt; None:  </span><br><span class="line">    path = Path(output_path)  </span><br><span class="line">    if ensure_dir:  </span><br><span class="line">        path.parent.mkdir(parents=True, exist_ok=True)  </span><br><span class="line">    path.write_bytes(binary_data)  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def extract_files(  </span><br><span class="line">        file_map: Dict[str, str],  </span><br><span class="line">        output_root: Union[str, Path] = &quot;&quot;  </span><br><span class="line">) -&gt; None:  </span><br><span class="line">    for filename, b64_data in file_map.items():  </span><br><span class="line">        try:  </span><br><span class="line">            uncompressed = decode_and_inflate(b64_data)  </span><br><span class="line">            target_path = Path(output_root) / filename  </span><br><span class="line">            save_content(target_path, uncompressed)  </span><br><span class="line">            print(f&quot;成功提取: &#123;target_path&#125;&quot;)  </span><br><span class="line">        except (ValueError, zlib.error) as e:  </span><br><span class="line">            print(f&quot;解码/解压失败 &#123;filename&#125;: &#123;str(e)&#125;&quot;)  </span><br><span class="line">        except OSError as e:  </span><br><span class="line">            print(f&quot;文件写入失败 &#123;filename&#125;: &#123;str(e)&#125;&quot;)  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">if __name__ == &quot;__main__&quot;:  </span><br><span class="line">    file_flag = &#123;  </span><br><span class="line">        &quot;vm_64.cfg&quot;: &quot;eNpNTtFugzAMfO...&quot;  #太长了不放了</span><br><span class="line">    &#125;  </span><br><span class="line">    extract_files(file_flag, &quot;output_files&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>随后直接找a9 然后扔<strong>ida9.0</strong>里 （实测ida8.3 7.7没办法F5 不知道什么原因┭┮﹏┭┮）</p>
+<p><img src="/../images/linuxpdf-1.png" alt="linuxpdf-1"></p>
+<p>跟进 发现md5初始化</p>
+<p><img src="/../images/linuxpdf-2.png" alt="linuxpdf-2"></p>
+<p>随后看unk_4008 发现是一堆md5值 中间用00分隔开</p>
+<p><img src="/../images/linuxpdf-3.png" alt="linuxpdf-3"></p>
+<p>提取出来爆破一下 发现最后三个爆破的很快 结果如下 </p>
+<p>CB0FC813755A45CE5984BFBA15847C1E——&gt;F}</p>
+<p>DF88931E7EEFDFCC2BB80D4A4F5710FB——&gt;DF}</p>
+<p>D6AF7C4FEDCF2B6777DF8E83C932F883——&gt;PDF}</p>
+<p>且有规律 爆破出来的字符在上一个的前面 所以可以猜到是从后往前依次爆破 直接把所有md5值提取出来 写脚本即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">import hashlib  </span><br><span class="line">import itertools  </span><br><span class="line">import sys  </span><br><span class="line">  </span><br><span class="line">chars = [chr(i) for i in range(32, 127)]  </span><br><span class="line">  </span><br><span class="line">def crack_md5_chain(target_hashes):  </span><br><span class="line">    cracked = []  </span><br><span class="line">    previous_plain = None  </span><br><span class="line">  </span><br><span class="line">    for idx, target_hash in enumerate(target_hashes):  </span><br><span class="line">        target_hash = target_hash.lower().strip()  </span><br><span class="line">        if idx == 0:  </span><br><span class="line">            for candidate in itertools.product(chars, repeat=2):  </span><br><span class="line">                plain = &#x27;&#x27;.join(candidate)  </span><br><span class="line">                if hashlib.md5(plain.encode()).hexdigest() == target_hash:  </span><br><span class="line">                    print(f&quot;[+] 成功破解第1个哈希: &#123;plain&#125;&quot;)  </span><br><span class="line">                    previous_plain = plain  </span><br><span class="line">                    cracked.append(plain)  </span><br><span class="line">                    break  </span><br><span class="line">            else:  </span><br><span class="line">                print(&quot;[-] 无法破解第一个哈希，终止流程&quot;)  </span><br><span class="line">                return None  </span><br><span class="line">        else:  # 后续哈希处理  </span><br><span class="line">            found = False  </span><br><span class="line">            for c in chars:  </span><br><span class="line">                plain = c + previous_plain  </span><br><span class="line">                if hashlib.md5(plain.encode()).hexdigest() == target_hash:  </span><br><span class="line">                    print(f&quot;[+] 成功破解第&#123;idx + 1&#125;个哈希: &#123;plain&#125;&quot;)  </span><br><span class="line">                    previous_plain = plain  </span><br><span class="line">                    cracked.append(plain)  </span><br><span class="line">                    found = True  </span><br><span class="line">                    break            if not found:  </span><br><span class="line">                print(f&quot;[-] 无法破解第&#123;idx + 1&#125;个哈希，终止流程&quot;)  </span><br><span class="line">                return None  </span><br><span class="line">    return cracked  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def main():  </span><br><span class="line">    if len(sys.argv) != 2:  </span><br><span class="line">        print(f&quot;用法: &#123;sys.argv[0]&#125; &lt;哈希文件&gt;&quot;)  </span><br><span class="line">        return  </span><br><span class="line">  </span><br><span class="line">    with open(sys.argv[1]) as f:  </span><br><span class="line">        hashes = [line.strip() for line in f if line.strip()]  </span><br><span class="line">  </span><br><span class="line">    if not hashes:  </span><br><span class="line">        print(&quot;错误：哈希文件为空&quot;)  </span><br><span class="line">        return  </span><br><span class="line">  </span><br><span class="line">    print(&quot;开始破解MD5链...&quot;)  </span><br><span class="line">    result = crack_md5_chain(hashes)  </span><br><span class="line">  </span><br><span class="line">    if result:  </span><br><span class="line">        print(&quot;\n破解结果链:&quot;)  </span><br><span class="line">        for i, plain in enumerate(result):  </span><br><span class="line">            print(f&quot;哈希&#123;i + 1&#125;: &#123;plain&#125;&quot;)  </span><br><span class="line">    else:  </span><br><span class="line">        print(&quot;\n未能完整破解哈希链&quot;)  </span><br><span class="line">  </span><br><span class="line">if __name__ == &quot;__main__&quot;:  </span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/linuxpdf-4.png" alt="linuxpdf-4"></p>
+<h1 id="portable"><a href="#portable" class="headerlink" title="portable"></a>portable</h1><p>ida打开附件 查看字符串 发现flag头</p>
+<p><img src="/../images/portable.png" alt="portable"></p>
+<p>随后在start函数开始 往下翻函数 在最后找到输入flag的函数 sub_407F30</p>
+<p><img src="/../images/portable-1.png" alt="portable-1"></p>
+<p>在下面找到一个异或 下面显示输入正确</p>
+<p><img src="/../images/portable-2.png" alt="portable-2"></p>
+<p>找一下密文跟密钥 扔赛博厨子里解一下得到flag</p>
+<p><img src="/../images/portable-3.png" alt="portable-3"></p>
+<p><img src="/../images/ef8695a42a6fbbf1b93202dc9f7bb705.png" alt="ef8695a42a6fbbf1b93202dc9f7bb705"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/10/2025-GHCTF-RE-wp/" rel="prev" title="2025 GHCTF RE wp">
+                  <i class="fa fa-angle-left"></i> 2025 GHCTF RE wp
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Patr1ck</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">90k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:21</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
